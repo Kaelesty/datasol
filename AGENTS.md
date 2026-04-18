@@ -2,13 +2,240 @@
 
 ## Purpose
 
-This repository contains a DatSteam DatsSol rules PDF and extracted text. This document is a practical English summary for coding agents that need to implement, review, or improve a bot for the game.
+This repository is no longer just a rules dump. It currently contains:
+- the original DatSteam DatsSol rules PDF
+- extracted rules text
+- a Python codebase with `model`, `data`, and `ui` layers
+- a local read-only web UI for inspecting live game state
+
+This document is a practical guide for coding agents working on the project. It covers:
+- game rules that matter for implementation
+- current code architecture
+- implemented features
+- conscious limitations and constraints
 
 Primary source files:
 - `DatsSol.pdf`
 - `DatsSol_extracted.txt`
 
-When the PDF and observed server behavior disagree, trust the server.
+Primary code entrypoint:
+- `run_ui.py`
+
+When the PDF, OpenAPI spec, and observed server behavior disagree, trust observed server behavior first, then the OpenAPI spec, then the PDF.
+
+## Current Architecture
+
+The codebase follows a lightweight three-layer structure:
+
+### `model`
+
+Path:
+- `src/datssol/model/`
+
+Responsibilities:
+- immutable dataclass entities and value objects
+- request and response models
+- gateway interfaces via `Protocol`
+- domain-level exceptions
+
+Important files:
+- `src/datssol/model/entities.py`
+- `src/datssol/model/interfaces.py`
+- `src/datssol/model/exceptions.py`
+
+Notes:
+- IDs are modeled as strings because the live server returns UUID-like identifiers for plantations and other entities.
+- Some fields are intentionally looser than the PDF suggests because the real server is less strict than the documentation.
+
+### `data`
+
+Path:
+- `src/datssol/data/`
+
+Responsibilities:
+- HTTP communication with the game server
+- JSON parsing and normalization
+- thin interactor wrappers for read and write use cases
+- token loading
+
+Important files:
+- `src/datssol/data/requests_gateway.py`
+- `src/datssol/data/interactors.py`
+- `src/datssol/data/token_loader.py`
+
+Notes:
+- `RequestsGameApiGateway` is the concrete gateway implementation.
+- It handles both documented error payloads (`code/errors`) and observed alternative payloads (`errCode/error`).
+- The gateway already supports `submit_command(...)`, but the current UI does not expose write operations.
+
+### `ui`
+
+Path:
+- `src/datssol/ui/`
+
+Current product UI:
+- local Flask web UI
+
+Important files:
+- `src/datssol/ui/web_app.py`
+- `src/datssol/ui/web_presenters.py`
+- `src/datssol/ui/templates/index.html`
+- `src/datssol/ui/static/js/app.js`
+- `src/datssol/ui/static/js/map.js`
+- `src/datssol/ui/static/css/style.css`
+
+Entrypoint:
+- `run_ui.py`
+
+Notes:
+- The browser UI is the primary supported interface.
+- A terminal UI file still exists in `src/datssol/ui/main.py`, but it is not the main product entrypoint anymore and should be treated as legacy/dev-only unless explicitly revived.
+
+## Current Product Scope
+
+The application is intentionally read-only at the UI level.
+
+Implemented user-facing capabilities:
+- inspect live arena state
+- inspect player logs
+- switch between `test` and `prod`
+- auto-refresh the dashboard
+- see a live tactical map integrated into the main page
+- pan and zoom the map
+- hover cells to inspect known entities on a coordinate
+
+Implemented backend capabilities that are not yet exposed in the product UI:
+- build `CommandRequest`
+- submit `POST /api/command`
+- buy upgrades via `plantationUpgrade`
+- relocate main via `relocateMain`
+
+Conscious scope decision:
+- keep the browser UI read-only until validation and safety checks for write actions are implemented properly
+
+## Current Web UI Behavior
+
+The main page is the only intended user-facing screen.
+
+Current behavior:
+- top section: server selection and global status
+- integrated tactical map near the top of the page
+- arena dashboard below the map
+- logs panel on the right
+
+Map behavior:
+- uses the same arena snapshot as the main dashboard
+- does not fetch its own independent arena state anymore
+- preserves zoom and pan across ordinary refreshes
+- only refits the view when the arena context changes, currently defined by server and map dimensions
+
+Map rendering includes:
+- own plantations
+- enemy plantations
+- constructions
+- beaver lairs
+- mountains
+- terraformed cells
+- meteo markers
+- boosted-cell highlighting for cells where both coordinates are divisible by 7
+
+Iconography:
+- the tactical map uses embedded SVG path data derived from official Heroicons assets
+- these are drawn into the canvas via `Path2D`
+- runtime does not fetch icons from the network
+
+## Current API Surface In The Project
+
+Documented game endpoints used by this project:
+1. `GET /api/arena`
+2. `GET /api/logs`
+3. `POST /api/command`
+
+Read endpoints currently used by the web UI:
+1. `GET /api/arena`
+2. `GET /api/logs`
+
+Internal app endpoints exposed by the Flask layer:
+1. `GET /`
+2. `GET /api/ui/meta`
+3. `GET /api/ui/arena`
+4. `GET /api/ui/logs`
+
+The Flask app does not expose any write endpoint to the browser.
+
+## Conscious Limitations
+
+These are deliberate project constraints at the current stage:
+
+1. No write actions from the browser UI.
+2. No persistent local database or snapshot history.
+3. No authentication UI; token is loaded from `.token`.
+4. No bot strategy engine yet.
+5. No command validation engine yet.
+6. No simulation layer for move preview yet.
+7. No tests for UI behavior yet.
+8. No websocket or push-based live updates; the UI polls periodically.
+9. No map diff visualization between turns yet.
+10. No production-grade packaging yet; the app is launched locally via `python run_ui.py`.
+
+## Dev Commands
+
+Primary local launch:
+- `python run_ui.py`
+
+Backend auto-restart on Python code changes:
+- PowerShell from repo root:
+- `powershell -ExecutionPolicy Bypass -File .\scripts\run_web_ui_dev.ps1`
+
+What this does:
+- sets `PYTHONPATH` to the local `src/`
+- runs Flask against `datssol.ui.web_app:create_app`
+- enables the Flask debug reloader so backend code changes restart automatically
+
+Notes:
+- this is for local development only
+- browser assets still require a normal page refresh to see frontend changes
+- do not use this command as the production launch path
+
+## Write Capabilities Present But Not Exposed
+
+The codebase already has the domain and data plumbing for write operations.
+
+Existing write primitives in code:
+- `CommandRequest`
+- `PlantationAction`
+- `ActionPath`
+- `RelocateMainPath`
+- `SubmitCommandInteractor`
+- `RequestsGameApiGateway.submit_command(...)`
+
+These support:
+- build
+- repair
+- sabotage
+- beaver attack
+- upgrade purchase
+- main relocation
+
+They are intentionally not wired into the browser UI yet.
+
+Reason:
+- unsafe to expose without range validation, connectivity validation, settlement-limit validation, and better user confirmation flows
+
+## Practical Engineering Rules For This Repo
+
+When changing the project, prefer these rules:
+
+1. Keep `model` free of HTTP or Flask concerns.
+2. Keep `data` responsible for protocol translation and server normalization.
+3. Keep `ui` responsible for presentation only.
+4. Do not make the browser UI issue raw game write requests directly.
+5. Route all game-server communication through the gateway/interactor layer.
+6. When the real server disagrees with the docs, update parsing code to match the real server and document the discrepancy.
+7. Preserve read-only behavior in the main UI unless the user explicitly asks to extend write capabilities.
+8. Avoid hidden write side effects inside read-only refresh code.
+9. Treat map viewport continuity as a UX invariant; ordinary refreshes should not reset pan/zoom.
+10. Prefer local embedded assets for critical map rendering rather than runtime third-party dependencies.
 
 ## Game Summary
 
