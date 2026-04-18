@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datssol.bot import BotRuntimeState
 from datssol.model import ArenaState
 from datssol.model import LogsResponse
 from datssol.model import Plantation
@@ -29,6 +30,7 @@ def arena_to_payload(state: ArenaState) -> dict[str, object]:
                 "id": item.id,
                 "position": point_to_payload(item.position),
                 "hp": item.hp,
+                "immunityUntilTurn": item.immunity_until_turn,
             }
             for item in state.enemy
         ],
@@ -104,6 +106,46 @@ def logs_to_payload(response: LogsResponse, tail: int) -> dict[str, object]:
         "entries": [{"time": item.time, "message": item.message} for item in entries],
         "totalEntries": len(response.entries),
         "tail": tail,
+    }
+
+
+def bot_state_to_payload(state: BotRuntimeState) -> dict[str, object]:
+    decision = state.last_decision
+    return {
+        "running": state.running,
+        "server": state.server,
+        "profile": state.profile,
+        "prodGuardRequired": state.prod_guard_required,
+        "sessionLogPath": state.session_log_path,
+        "lastSeenTurn": state.last_seen_turn,
+        "lastSubmittedTurn": state.last_submitted_turn,
+        "submittedCount": state.submitted_count,
+        "skippedCount": state.skipped_count,
+        "rejectedCount": state.rejected_count,
+        "errorCount": state.error_count,
+        "lastError": state.last_error,
+        "lastDecision": (
+            {
+                "turnNo": decision.turn_no,
+                "profile": decision.profile,
+                "reason": decision.reason,
+                "estimatedScore": decision.estimated_score,
+                "actions": list(decision.actions),
+                "actionDetails": [
+                    {
+                        "kind": item.kind,
+                        "summary": item.summary,
+                        "score": item.score,
+                        "author": point_to_payload(item.author) if item.author else None,
+                        "exitPoint": point_to_payload(item.exit_point) if item.exit_point else None,
+                        "target": point_to_payload(item.target) if item.target else None,
+                    }
+                    for item in decision.action_details
+                ],
+            }
+            if decision is not None
+            else None
+        ),
     }
 
 

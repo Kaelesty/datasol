@@ -1,0 +1,913 @@
+[2026-04-18T10:57:33.000313+00:00] SESSION START server=test profile=safe token_file=.token timeout_seconds=10.0 poll_interval_seconds=0.25
+[2026-04-18T10:57:33.853313+00:00] TURN 579 SNAPSHOT next_turn_in=0.746s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=13
+[2026-04-18T10:57:33.853657+00:00] PLAN turn=579 profile=safe
+[2026-04-18T10:57:33.853676+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:33.853687+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=32 has_upgrade_points=True
+[2026-04-18T10:57:33.853877+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:33.853890+00:00] PLAN top candidates:
+[2026-04-18T10:57:33.853895+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:33.853900+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:33.853904+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:33.853908+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:33.853913+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:33.853918+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:33.853923+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:33.853927+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:33.853931+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:33.853935+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:33.853940+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:33.853968+00:00] DECISION turn=579 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:33.853979+00:00] TURN 579 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:33.946659+00:00] TURN 579 RESPONSE success code=0 errors=[]
+[2026-04-18T10:57:34.806381+00:00] TURN 580 SNAPSHOT next_turn_in=0.789s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:34.806638+00:00] PLAN turn=580 profile=safe
+[2026-04-18T10:57:34.806649+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:34.806656+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:34.806662+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:34.806668+00:00] PLAN top candidates:
+[2026-04-18T10:57:34.806673+00:00] PLAN   build mode=continue score=715.56 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:34.806679+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:34.806684+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:34.806689+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:34.806695+00:00] PLAN select build mode=continue score=715.56 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=715.56
+[2026-04-18T10:57:34.806701+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:34.806746+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:34.806755+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:34.806760+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:34.806765+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:34.806771+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:34.806797+00:00] DECISION turn=580 profile=safe estimated_score=747.56 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['continue construction [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:34.806809+00:00] TURN 580 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:34.910155+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:35.703760+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:57:36.580641+00:00] TURN 581 SNAPSHOT next_turn_in=0.019s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:36.580894+00:00] PLAN turn=581 profile=safe
+[2026-04-18T10:57:36.580904+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:36.580911+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:36.580917+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:36.580923+00:00] PLAN top candidates:
+[2026-04-18T10:57:36.580928+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:36.580934+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:36.580939+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:36.580944+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:36.580950+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:36.580956+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:36.580961+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:36.580967+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:36.580972+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:36.580978+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:36.580984+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:36.581006+00:00] DECISION turn=581 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:36.581017+00:00] TURN 581 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:36.678549+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:37.568412+00:00] TURN 582 SNAPSHOT next_turn_in=0.037s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:37.568715+00:00] PLAN turn=582 profile=safe
+[2026-04-18T10:57:37.568729+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:37.568737+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:37.568743+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:37.568748+00:00] PLAN top candidates:
+[2026-04-18T10:57:37.568754+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:37.568759+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:37.568764+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:37.568770+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:37.568775+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:37.568780+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:37.568786+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:37.568791+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:37.568796+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:37.568801+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:37.568806+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:37.568830+00:00] DECISION turn=582 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:37.568840+00:00] TURN 582 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:37.663679+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:38.599178+00:00] TURN 583 SNAPSHOT next_turn_in=0.006s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:38.599474+00:00] PLAN turn=583 profile=safe
+[2026-04-18T10:57:38.599490+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:38.599498+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:38.599504+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:38.599510+00:00] PLAN top candidates:
+[2026-04-18T10:57:38.599517+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:38.599525+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:38.599533+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:38.599538+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:38.599544+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:38.599550+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:38.599555+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:38.599566+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:38.599576+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:38.599581+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:38.599586+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:38.599612+00:00] DECISION turn=583 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:38.599623+00:00] TURN 583 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:38.695631+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:39.536783+00:00] TURN 584 SNAPSHOT next_turn_in=0.060s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:39.537058+00:00] PLAN turn=584 profile=safe
+[2026-04-18T10:57:39.537071+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:39.537080+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:39.537087+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:39.537094+00:00] PLAN top candidates:
+[2026-04-18T10:57:39.537100+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:39.537107+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:39.537114+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:39.537120+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:39.537127+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:39.537133+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:39.537140+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:39.537147+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:39.537153+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:39.537161+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:39.537167+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:39.537194+00:00] DECISION turn=584 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:39.537207+00:00] TURN 584 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:39.629634+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:40.578278+00:00] TURN 585 SNAPSHOT next_turn_in=0.018s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:40.578487+00:00] PLAN turn=585 profile=safe
+[2026-04-18T10:57:40.578496+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:40.578542+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:40.578550+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:40.578555+00:00] PLAN top candidates:
+[2026-04-18T10:57:40.578559+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:40.578564+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:40.578568+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:40.578573+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:40.578577+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:40.578582+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:40.578586+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:40.578591+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:40.578595+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:40.578600+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:40.578604+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:40.578625+00:00] DECISION turn=585 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:40.578634+00:00] TURN 585 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:40.679515+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:41.512524+00:00] TURN 586 SNAPSHOT next_turn_in=0.083s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:41.512734+00:00] PLAN turn=586 profile=safe
+[2026-04-18T10:57:41.512746+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:41.512752+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:41.512757+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:41.512761+00:00] PLAN top candidates:
+[2026-04-18T10:57:41.512766+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:41.512771+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:41.512775+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:41.512779+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:41.512784+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:41.512788+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:41.512792+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:41.512797+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:41.512804+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:41.512810+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:41.512814+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:41.512833+00:00] DECISION turn=586 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:41.512842+00:00] TURN 586 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:41.633052+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:42.505079+00:00] TURN 587 SNAPSHOT next_turn_in=0.092s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:42.505285+00:00] PLAN turn=587 profile=safe
+[2026-04-18T10:57:42.505295+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:42.505302+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:42.505307+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:42.505312+00:00] PLAN top candidates:
+[2026-04-18T10:57:42.505316+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:42.505321+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:42.505325+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:42.505330+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:42.505334+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:42.505339+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:42.505344+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:42.505348+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:42.505352+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:42.505357+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:42.505362+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:42.505380+00:00] DECISION turn=587 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:42.505389+00:00] TURN 587 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:42.598952+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:43.679856+00:00] TURN 589 SNAPSHOT next_turn_in=0.925s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:43.680152+00:00] PLAN turn=589 profile=safe
+[2026-04-18T10:57:43.680171+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:43.680183+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:43.680193+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:43.680245+00:00] PLAN top candidates:
+[2026-04-18T10:57:43.680257+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:43.680263+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:43.680269+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:43.680274+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:43.680280+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:43.680285+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:43.680291+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:43.680296+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:43.680302+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:43.680308+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:43.680313+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:43.680338+00:00] DECISION turn=589 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:43.680352+00:00] TURN 589 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:43.769807+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:44.617518+00:00] TURN 589 SNAPSHOT next_turn_in=0.980s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:44.617767+00:00] PLAN turn=589 profile=safe
+[2026-04-18T10:57:44.617784+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=1
+[2026-04-18T10:57:44.617794+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:44.617802+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:44.617809+00:00] PLAN top candidates:
+[2026-04-18T10:57:44.617817+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:44.617825+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:44.617833+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:44.617841+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:44.617849+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:44.617858+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:44.617867+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:44.617875+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:44.617882+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:44.617888+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:44.617894+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:44.617932+00:00] DECISION turn=589 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:44.617945+00:00] TURN 589 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:44.708900+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:45.570350+00:00] TURN 590 SNAPSHOT next_turn_in=0.026s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:45.570558+00:00] PLAN turn=590 profile=safe
+[2026-04-18T10:57:45.570567+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:45.570573+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:45.570579+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:45.570583+00:00] PLAN top candidates:
+[2026-04-18T10:57:45.570587+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:45.570592+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:45.570596+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:45.570601+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:45.570605+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:45.570610+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:45.570614+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:45.570618+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:45.570623+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:45.570627+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:45.570632+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:45.570652+00:00] DECISION turn=590 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:45.570660+00:00] TURN 590 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:45.662078+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:46.560754+00:00] TURN 591 SNAPSHOT next_turn_in=0.054s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:46.560968+00:00] PLAN turn=591 profile=safe
+[2026-04-18T10:57:46.560978+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:46.560984+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:46.560989+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:46.560994+00:00] PLAN top candidates:
+[2026-04-18T10:57:46.560998+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:46.561003+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:46.561043+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:46.561050+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:46.561054+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:46.561059+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:46.561063+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:46.561067+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:46.561072+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:46.561076+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:46.561080+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:46.561101+00:00] DECISION turn=591 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:46.561110+00:00] TURN 591 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:46.668267+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:47.624054+00:00] TURN 592 SNAPSHOT next_turn_in=0.000s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:47.624300+00:00] PLAN turn=592 profile=safe
+[2026-04-18T10:57:47.624310+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:47.624317+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:47.624323+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:47.624328+00:00] PLAN top candidates:
+[2026-04-18T10:57:47.624334+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:47.624339+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:47.624344+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:47.624350+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:47.624355+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:47.624361+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:47.624366+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:47.624372+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:47.624377+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:47.624382+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:47.624387+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:47.624409+00:00] DECISION turn=592 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:47.624459+00:00] TURN 592 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:47.711918+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:48.559226+00:00] TURN 593 SNAPSHOT next_turn_in=0.036s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:48.559434+00:00] PLAN turn=593 profile=safe
+[2026-04-18T10:57:48.559443+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:48.559449+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:48.559454+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:48.559459+00:00] PLAN top candidates:
+[2026-04-18T10:57:48.559463+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:48.559468+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:48.559472+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:48.559476+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:48.559480+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:48.559485+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:48.559489+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:48.559493+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:48.559498+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:48.559502+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:48.559507+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:48.559526+00:00] DECISION turn=593 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:48.559535+00:00] TURN 593 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:48.663867+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:49.536483+00:00] TURN 594 SNAPSHOT next_turn_in=0.059s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:49.536760+00:00] PLAN turn=594 profile=safe
+[2026-04-18T10:57:49.536773+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:49.536781+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:49.536789+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:49.536796+00:00] PLAN top candidates:
+[2026-04-18T10:57:49.536803+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:49.536810+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:49.536816+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:49.536822+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:49.536870+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:49.536877+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:49.536882+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:49.536886+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:49.536891+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:49.536895+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:49.536900+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:49.536920+00:00] DECISION turn=594 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:49.536930+00:00] TURN 594 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:49.629473+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:50.551482+00:00] TURN 595 SNAPSHOT next_turn_in=0.046s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[236,263] hp=40 isolated=False upgrade_points=12
+[2026-04-18T10:57:50.551763+00:00] PLAN turn=595 profile=safe
+[2026-04-18T10:57:50.551775+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=2
+[2026-04-18T10:57:50.551783+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:50.551789+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:50.551794+00:00] PLAN top candidates:
+[2026-04-18T10:57:50.551798+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:50.551803+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262]
+[2026-04-18T10:57:50.551807+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264]
+[2026-04-18T10:57:50.551811+00:00] PLAN   build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263]
+[2026-04-18T10:57:50.551816+00:00] PLAN select build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263] raw_score=423.62
+[2026-04-18T10:57:50.551820+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,262] reason=author already used
+[2026-04-18T10:57:50.551824+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[236,264] reason=author already used
+[2026-04-18T10:57:50.551829+00:00] PLAN reject build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[237,263] reason=author already used
+[2026-04-18T10:57:50.551833+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:50.551837+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[236,263] exit=[236,263] target=[235,263]
+[2026-04-18T10:57:50.551842+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:50.551861+00:00] DECISION turn=595 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [235, 263] from [236, 263]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:50.551870+00:00] TURN 595 REQUEST commands=['path=[[236,263],[236,263],[235,263]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:50.637519+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:51.748154+00:00] TURN 597 SNAPSHOT next_turn_in=0.849s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=0 main=[223,260] hp=50 isolated=False upgrade_points=12
+[2026-04-18T10:57:51.748394+00:00] PLAN turn=597 profile=safe
+[2026-04-18T10:57:51.748404+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=0 mountains=0
+[2026-04-18T10:57:51.748411+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=33 has_upgrade_points=True
+[2026-04-18T10:57:51.748417+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:51.748423+00:00] PLAN top candidates:
+[2026-04-18T10:57:51.748428+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:51.748434+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259]
+[2026-04-18T10:57:51.748439+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261]
+[2026-04-18T10:57:51.748444+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260]
+[2026-04-18T10:57:51.748449+00:00] PLAN select build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260] raw_score=423.62
+[2026-04-18T10:57:51.748455+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259] reason=author already used
+[2026-04-18T10:57:51.748460+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261] reason=author already used
+[2026-04-18T10:57:51.748465+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260] reason=author already used
+[2026-04-18T10:57:51.748470+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:51.748475+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:51.748481+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:51.748503+00:00] DECISION turn=597 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [222, 260] from [223, 260]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:51.748513+00:00] TURN 597 REQUEST commands=['path=[[223,260],[223,260],[222,260]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:51.837311+00:00] TURN 597 RESPONSE success code=0 errors=[]
+[2026-04-18T10:57:52.634293+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:57:53.498296+00:00] TURN 598 SNAPSHOT next_turn_in=0.099s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[223,260] hp=50 isolated=False upgrade_points=11
+[2026-04-18T10:57:53.498519+00:00] PLAN turn=598 profile=safe
+[2026-04-18T10:57:53.498529+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:57:53.498535+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=34 has_upgrade_points=True
+[2026-04-18T10:57:53.498540+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:53.498545+00:00] PLAN top candidates:
+[2026-04-18T10:57:53.498550+00:00] PLAN   build mode=continue score=715.56 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:53.498555+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259]
+[2026-04-18T10:57:53.498559+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261]
+[2026-04-18T10:57:53.498564+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260]
+[2026-04-18T10:57:53.498568+00:00] PLAN select build mode=continue score=715.56 power=5 author=[223,260] exit=[223,260] target=[222,260] raw_score=715.56
+[2026-04-18T10:57:53.498576+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259] reason=author already used
+[2026-04-18T10:57:53.498582+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261] reason=author already used
+[2026-04-18T10:57:53.498587+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260] reason=author already used
+[2026-04-18T10:57:53.498591+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:53.498596+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:53.498601+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:53.498621+00:00] DECISION turn=598 profile=safe estimated_score=747.56 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['continue construction [222, 260] from [223, 260]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:53.498630+00:00] TURN 598 REQUEST commands=['path=[[223,260],[223,260],[222,260]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:53.583598+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:54.456988+00:00] TURN 599 SNAPSHOT next_turn_in=0.139s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[223,260] hp=50 isolated=False upgrade_points=11
+[2026-04-18T10:57:54.457205+00:00] PLAN turn=599 profile=safe
+[2026-04-18T10:57:54.457216+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:57:54.457222+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=34 has_upgrade_points=True
+[2026-04-18T10:57:54.457227+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:54.457232+00:00] PLAN top candidates:
+[2026-04-18T10:57:54.457236+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:54.457241+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259]
+[2026-04-18T10:57:54.457245+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261]
+[2026-04-18T10:57:54.457250+00:00] PLAN   build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260]
+[2026-04-18T10:57:54.457254+00:00] PLAN select build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260] raw_score=423.62
+[2026-04-18T10:57:54.457258+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,259] reason=author already used
+[2026-04-18T10:57:54.457263+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[223,261] reason=author already used
+[2026-04-18T10:57:54.457267+00:00] PLAN reject build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[224,260] reason=author already used
+[2026-04-18T10:57:54.457271+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:54.457275+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[223,260] exit=[223,260] target=[222,260]
+[2026-04-18T10:57:54.457280+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:57:54.457299+00:00] DECISION turn=599 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [222, 260] from [223, 260]', 'buy upgrade settlement_limit']
+[2026-04-18T10:57:54.457308+00:00] TURN 599 REQUEST commands=['path=[[223,260],[223,260],[222,260]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:57:54.555516+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:57:55.553014+00:00] TURN 0 SNAPSHOT next_turn_in=0.000s map=0x0 own=0 enemy=0 construction=0 beavers=0 cells=0 main=none upgrade_points=0
+[2026-04-18T10:57:55.553105+00:00] PLAN turn=0 profile=safe
+[2026-04-18T10:57:55.553126+00:00] PLAN arena counts: own=0 enemy=0 construction=0 beavers=0 cells=0 mountains=0
+[2026-04-18T10:57:55.553135+00:00] PLAN safety snapshot: connected=0 critical=0 signal_range=3 action_range=0 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:57:55.553143+00:00] PLAN candidate counts: none
+[2026-04-18T10:57:55.553152+00:00] PLAN top candidates:
+[2026-04-18T10:57:55.553160+00:00] PLAN   none
+[2026-04-18T10:57:55.553168+00:00] PLAN selected summary: none
+[2026-04-18T10:57:55.553187+00:00] DECISION turn=0 profile=safe estimated_score=0.0 reason=no safe plantation action found actions=[]
+[2026-04-18T10:57:55.553195+00:00] TURN 0 SKIP reason=no safe plantation action found
+[2026-04-18T10:57:57.243962+00:00] TURN 2 SNAPSHOT next_turn_in=0.287s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:57:57.244276+00:00] PLAN turn=2 profile=safe
+[2026-04-18T10:57:57.244295+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:57:57.244306+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:57:57.244314+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:57.244320+00:00] PLAN top candidates:
+[2026-04-18T10:57:57.244325+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:57.244331+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:57:57.244336+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:57:57.244341+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:57:57.244347+00:00] PLAN select build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=423.62
+[2026-04-18T10:57:57.244352+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:57:57.244358+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:57:57.244363+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:57:57.244369+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:57.244374+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:57.244397+00:00] DECISION turn=2 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [165, 268] from [166, 268]']
+[2026-04-18T10:57:57.244409+00:00] TURN 2 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:57:57.337723+00:00] TURN 2 RESPONSE success code=0 errors=[]
+[2026-04-18T10:57:58.165198+00:00] TURN 3 SNAPSHOT next_turn_in=0.373s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:57:58.165510+00:00] PLAN turn=3 profile=safe
+[2026-04-18T10:57:58.165525+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:57:58.165535+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:57:58.165541+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:58.165546+00:00] PLAN top candidates:
+[2026-04-18T10:57:58.165552+00:00] PLAN   build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:58.165558+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:57:58.165566+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:57:58.165573+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:57:58.165578+00:00] PLAN select build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=715.56
+[2026-04-18T10:57:58.165583+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:57:58.165588+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:57:58.165594+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:57:58.165598+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:58.165604+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:58.165625+00:00] DECISION turn=3 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:57:58.165635+00:00] TURN 3 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:57:58.283932+00:00] TURN 3 RESPONSE success code=0 errors=[]
+[2026-04-18T10:57:59.095870+00:00] TURN 4 SNAPSHOT next_turn_in=0.432s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:57:59.096142+00:00] PLAN turn=4 profile=safe
+[2026-04-18T10:57:59.096155+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:57:59.096164+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:57:59.096171+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:57:59.096177+00:00] PLAN top candidates:
+[2026-04-18T10:57:59.096185+00:00] PLAN   build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:59.096192+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:57:59.096198+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:57:59.096205+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:57:59.096211+00:00] PLAN select build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=738.06
+[2026-04-18T10:57:59.096217+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:57:59.096224+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:57:59.096230+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:57:59.096237+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:57:59.096243+00:00] PLAN selected summary: build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:57:59.096268+00:00] DECISION turn=4 profile=safe estimated_score=738.06 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:57:59.096280+00:00] TURN 4 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:57:59.184953+00:00] TURN 4 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:00.011900+00:00] TURN 5 SNAPSHOT next_turn_in=0.518s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:00.012168+00:00] PLAN turn=5 profile=safe
+[2026-04-18T10:58:00.012179+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:00.012185+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:00.012190+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:00.012195+00:00] PLAN top candidates:
+[2026-04-18T10:58:00.012200+00:00] PLAN   build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:00.012205+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:00.012209+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:00.012214+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:00.012219+00:00] PLAN select build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=760.56
+[2026-04-18T10:58:00.012223+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:00.012228+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:00.012233+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:00.012237+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:00.012242+00:00] PLAN selected summary: build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:00.012260+00:00] DECISION turn=5 profile=safe estimated_score=760.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:00.012269+00:00] TURN 5 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:00.098781+00:00] TURN 5 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:01.014179+00:00] TURN 6 SNAPSHOT next_turn_in=0.515s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:01.014415+00:00] PLAN turn=6 profile=safe
+[2026-04-18T10:58:01.014426+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:01.014433+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:01.014439+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:01.014445+00:00] PLAN top candidates:
+[2026-04-18T10:58:01.014450+00:00] PLAN   build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:01.014456+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:01.014462+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:01.014467+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:01.014473+00:00] PLAN select build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=783.06
+[2026-04-18T10:58:01.014478+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:01.014484+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:01.014490+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:01.014499+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:01.014506+00:00] PLAN selected summary: build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:01.014527+00:00] DECISION turn=6 profile=safe estimated_score=783.06 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:01.014538+00:00] TURN 6 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:01.131188+00:00] TURN 6 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:01.926597+00:00] TURN 7 SNAPSHOT next_turn_in=0.604s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:01.926793+00:00] PLAN turn=7 profile=safe
+[2026-04-18T10:58:01.926802+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:01.926808+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:01.926813+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:01.926817+00:00] PLAN top candidates:
+[2026-04-18T10:58:01.926822+00:00] PLAN   build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:01.926826+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:01.926834+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:01.926839+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:01.926843+00:00] PLAN select build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=805.56
+[2026-04-18T10:58:01.926847+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:01.926852+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:01.926856+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:01.926860+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:01.926865+00:00] PLAN selected summary: build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:01.926883+00:00] DECISION turn=7 profile=safe estimated_score=805.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:01.926891+00:00] TURN 7 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:02.010141+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:02.845107+00:00] TURN 8 SNAPSHOT next_turn_in=0.686s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:02.845340+00:00] PLAN turn=8 profile=safe
+[2026-04-18T10:58:02.845350+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:02.845357+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:02.845363+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:02.845368+00:00] PLAN top candidates:
+[2026-04-18T10:58:02.845374+00:00] PLAN   build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:02.845380+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:02.845389+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:02.845396+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:02.845402+00:00] PLAN select build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=760.56
+[2026-04-18T10:58:02.845407+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:02.845412+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:02.845417+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:02.845422+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:02.845427+00:00] PLAN selected summary: build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:02.845447+00:00] DECISION turn=8 profile=safe estimated_score=760.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:02.845458+00:00] TURN 8 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:02.932756+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:03.816250+00:00] TURN 9 SNAPSHOT next_turn_in=0.712s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:03.816462+00:00] PLAN turn=9 profile=safe
+[2026-04-18T10:58:03.816472+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:03.816478+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:03.816482+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:03.816487+00:00] PLAN top candidates:
+[2026-04-18T10:58:03.816492+00:00] PLAN   build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:03.816496+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:03.816500+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:03.816505+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:03.816509+00:00] PLAN select build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=715.56
+[2026-04-18T10:58:03.816513+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:03.816517+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:03.816521+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:03.816526+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:03.816530+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:03.816548+00:00] DECISION turn=9 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:03.816556+00:00] TURN 9 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:03.922892+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:04.766269+00:00] TURN 10 SNAPSHOT next_turn_in=0.768s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:04.766498+00:00] PLAN turn=10 profile=safe
+[2026-04-18T10:58:04.766509+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:04.766517+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:04.766523+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:04.766529+00:00] PLAN top candidates:
+[2026-04-18T10:58:04.766535+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:04.766540+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:04.766545+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:04.766551+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:04.766557+00:00] PLAN select build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=423.62
+[2026-04-18T10:58:04.766562+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:04.766568+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:04.766573+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:04.766578+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:04.766583+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:04.766604+00:00] DECISION turn=10 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [165, 268] from [166, 268]']
+[2026-04-18T10:58:04.766614+00:00] TURN 10 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:04.857493+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:05.716742+00:00] TURN 11 SNAPSHOT next_turn_in=0.815s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:05.717023+00:00] PLAN turn=11 profile=safe
+[2026-04-18T10:58:05.717035+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:05.717043+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:05.717050+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:05.717057+00:00] PLAN top candidates:
+[2026-04-18T10:58:05.717063+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:05.717070+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:05.717076+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:05.717082+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:05.717088+00:00] PLAN select build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=423.62
+[2026-04-18T10:58:05.717094+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:05.717101+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:05.717111+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:05.717119+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:05.717126+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:05.717150+00:00] DECISION turn=11 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [165, 268] from [166, 268]']
+[2026-04-18T10:58:05.717162+00:00] TURN 11 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:05.803726+00:00] TURN 11 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:06.608575+00:00] TURN 12 SNAPSHOT next_turn_in=0.921s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:06.608769+00:00] PLAN turn=12 profile=safe
+[2026-04-18T10:58:06.608777+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:06.608783+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:06.608788+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:06.608793+00:00] PLAN top candidates:
+[2026-04-18T10:58:06.608798+00:00] PLAN   build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:06.608802+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:06.608807+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:06.608811+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:06.608815+00:00] PLAN select build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=715.56
+[2026-04-18T10:58:06.608820+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:06.608824+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:06.608828+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:06.608833+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:06.608838+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:06.608856+00:00] DECISION turn=12 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:06.608865+00:00] TURN 12 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:06.693756+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:07.518400+00:00] TURN 12 SNAPSHOT next_turn_in=0.014s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:07.518606+00:00] PLAN turn=12 profile=safe
+[2026-04-18T10:58:07.518616+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:07.518623+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:07.518628+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:07.518632+00:00] PLAN top candidates:
+[2026-04-18T10:58:07.518637+00:00] PLAN   build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:07.518645+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:07.518650+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:07.518655+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:07.518659+00:00] PLAN select build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=715.56
+[2026-04-18T10:58:07.518663+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:07.518667+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:07.518672+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:07.518676+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:07.518680+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:07.518699+00:00] DECISION turn=12 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:07.518708+00:00] TURN 12 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:07.610172+00:00] TURN 12 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:08.449576+00:00] TURN 13 SNAPSHOT next_turn_in=0.081s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:08.449789+00:00] PLAN turn=13 profile=safe
+[2026-04-18T10:58:08.449798+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:08.449804+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:08.449810+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:08.449815+00:00] PLAN top candidates:
+[2026-04-18T10:58:08.449819+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:08.449824+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:08.449828+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:08.449832+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:08.449837+00:00] PLAN select build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=423.62
+[2026-04-18T10:58:08.449841+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:08.449846+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:08.449850+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:08.449854+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:08.449859+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:08.449877+00:00] DECISION turn=13 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [165, 268] from [166, 268]']
+[2026-04-18T10:58:08.449885+00:00] TURN 13 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:08.553099+00:00] TURN 13 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:09.346940+00:00] TURN 14 SNAPSHOT next_turn_in=0.183s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:09.347133+00:00] PLAN turn=14 profile=safe
+[2026-04-18T10:58:09.347142+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:09.347148+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:09.347153+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:09.347157+00:00] PLAN top candidates:
+[2026-04-18T10:58:09.347162+00:00] PLAN   build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:09.347166+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:09.347171+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:09.347175+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:09.347179+00:00] PLAN select build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=715.56
+[2026-04-18T10:58:09.347183+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:09.347188+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:09.347192+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:09.347196+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:09.347201+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:09.347219+00:00] DECISION turn=14 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:09.347227+00:00] TURN 14 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:09.443255+00:00] TURN 14 RESPONSE failure code=0 errors=command already submitted this turn
+[2026-04-18T10:58:10.260440+00:00] TURN 15 SNAPSHOT next_turn_in=0.269s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:10.260670+00:00] PLAN turn=15 profile=safe
+[2026-04-18T10:58:10.260681+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:10.260688+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:10.260694+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:10.260699+00:00] PLAN top candidates:
+[2026-04-18T10:58:10.260705+00:00] PLAN   build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:10.260710+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:10.260716+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:10.260721+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:10.260726+00:00] PLAN select build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=738.06
+[2026-04-18T10:58:10.260731+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:10.260737+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:10.260746+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:10.260754+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:10.260759+00:00] PLAN selected summary: build mode=continue score=738.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:10.260780+00:00] DECISION turn=15 profile=safe estimated_score=738.06 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:10.260790+00:00] TURN 15 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:10.360966+00:00] TURN 15 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:11.207892+00:00] TURN 16 SNAPSHOT next_turn_in=0.323s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:11.208176+00:00] PLAN turn=16 profile=safe
+[2026-04-18T10:58:11.208188+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:11.208196+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:11.208202+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:11.208207+00:00] PLAN top candidates:
+[2026-04-18T10:58:11.208213+00:00] PLAN   build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:11.208218+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:11.208224+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:11.208229+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:11.208234+00:00] PLAN select build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=760.56
+[2026-04-18T10:58:11.208240+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:11.208245+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:11.208250+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:11.208255+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:11.208261+00:00] PLAN selected summary: build mode=continue score=760.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:11.208282+00:00] DECISION turn=16 profile=safe estimated_score=760.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:11.208293+00:00] TURN 16 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:11.296107+00:00] TURN 16 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:12.100187+00:00] TURN 17 SNAPSHOT next_turn_in=0.442s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:12.100431+00:00] PLAN turn=17 profile=safe
+[2026-04-18T10:58:12.100444+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:12.100450+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:12.100455+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:12.100459+00:00] PLAN top candidates:
+[2026-04-18T10:58:12.100464+00:00] PLAN   build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:12.100468+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:12.100476+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:12.100482+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:12.100486+00:00] PLAN select build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=783.06
+[2026-04-18T10:58:12.100490+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:12.100495+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:12.100499+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:12.100503+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:12.100507+00:00] PLAN selected summary: build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:12.100526+00:00] DECISION turn=17 profile=safe estimated_score=783.06 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:12.100535+00:00] TURN 17 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:12.188593+00:00] TURN 17 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:13.048342+00:00] TURN 18 SNAPSHOT next_turn_in=0.480s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:13.048567+00:00] PLAN turn=18 profile=safe
+[2026-04-18T10:58:13.048577+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:13.048584+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:13.048589+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:13.048595+00:00] PLAN top candidates:
+[2026-04-18T10:58:13.048600+00:00] PLAN   build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:13.048606+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:13.048612+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:13.048617+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:13.048622+00:00] PLAN select build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=805.56
+[2026-04-18T10:58:13.048627+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:13.048632+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:13.048638+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:13.048643+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:13.048648+00:00] PLAN selected summary: build mode=continue score=805.56 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:13.048669+00:00] DECISION turn=18 profile=safe estimated_score=805.56 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:13.048679+00:00] TURN 18 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:13.137485+00:00] TURN 18 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:14.037041+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:58:14.881772+00:00] TURN 20 SNAPSHOT next_turn_in=0.648s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[166,268] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:14.882005+00:00] PLAN turn=20 profile=safe
+[2026-04-18T10:58:14.882016+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:14.882022+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:14.882028+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:14.882033+00:00] PLAN top candidates:
+[2026-04-18T10:58:14.882039+00:00] PLAN   build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:14.882044+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267]
+[2026-04-18T10:58:14.882050+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269]
+[2026-04-18T10:58:14.882055+00:00] PLAN   build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268]
+[2026-04-18T10:58:14.882060+00:00] PLAN select build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268] raw_score=783.06
+[2026-04-18T10:58:14.882103+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,267] reason=author already used
+[2026-04-18T10:58:14.882110+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[166,269] reason=author already used
+[2026-04-18T10:58:14.882115+00:00] PLAN reject build mode=new score=423.62 power=5 author=[166,268] exit=[166,268] target=[167,268] reason=author already used
+[2026-04-18T10:58:14.882121+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:14.882126+00:00] PLAN selected summary: build mode=continue score=783.06 power=5 author=[166,268] exit=[166,268] target=[165,268]
+[2026-04-18T10:58:14.882147+00:00] DECISION turn=20 profile=safe estimated_score=783.06 reason=selected 1 plantation actions actions=['continue construction [165, 268] from [166, 268]']
+[2026-04-18T10:58:14.882157+00:00] TURN 20 REQUEST commands=['path=[[166,268],[166,268],[165,268]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:14.980949+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:15.819070+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:58:16.655722+00:00] TURN 22 SNAPSHOT next_turn_in=0.885s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:16.655929+00:00] PLAN turn=22 profile=safe
+[2026-04-18T10:58:16.655938+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:16.655944+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:16.655948+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:16.655953+00:00] PLAN top candidates:
+[2026-04-18T10:58:16.655958+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:16.655963+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:16.655967+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:16.655971+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:16.655976+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:16.655980+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:16.655989+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:16.655996+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:16.656000+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:16.656005+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:16.656025+00:00] DECISION turn=22 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [147, 187] from [148, 187]']
+[2026-04-18T10:58:16.656034+00:00] TURN 22 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:16.740664+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:18.010787+00:00] TURN 23 SNAPSHOT next_turn_in=0.520s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:18.011378+00:00] PLAN turn=23 profile=safe
+[2026-04-18T10:58:18.012352+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:18.012373+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:18.012382+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:18.012388+00:00] PLAN top candidates:
+[2026-04-18T10:58:18.012393+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:18.012399+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:18.012404+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:18.012411+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:18.012419+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:18.012475+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:18.012494+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:18.012503+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:18.012512+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:18.012519+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:18.012588+00:00] DECISION turn=23 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [147, 187] from [148, 187]']
+[2026-04-18T10:58:18.012605+00:00] TURN 23 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:18.118599+00:00] TURN 23 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:18.934669+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:58:19.770370+00:00] TURN 25 SNAPSHOT next_turn_in=0.758s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:19.770573+00:00] PLAN turn=25 profile=safe
+[2026-04-18T10:58:19.770581+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:19.770587+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:19.770595+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:19.770601+00:00] PLAN top candidates:
+[2026-04-18T10:58:19.770606+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:19.770610+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:19.770615+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:19.770619+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:19.770623+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:19.770627+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:19.770632+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:19.770636+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:19.770640+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:19.770645+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:19.770663+00:00] DECISION turn=25 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [147, 187] from [148, 187]']
+[2026-04-18T10:58:19.770671+00:00] TURN 25 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:19.863412+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:20.852676+00:00] TURN 26 SNAPSHOT next_turn_in=0.679s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:20.852919+00:00] PLAN turn=26 profile=safe
+[2026-04-18T10:58:20.852930+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:20.852936+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:20.852940+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:20.852945+00:00] PLAN top candidates:
+[2026-04-18T10:58:20.852949+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:20.852954+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:20.852958+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:20.852962+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:20.852967+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:20.852971+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:20.852975+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:20.852979+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:20.852983+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:20.852988+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:20.853014+00:00] DECISION turn=26 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [147, 187] from [148, 187]']
+[2026-04-18T10:58:20.853025+00:00] TURN 26 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:20.964635+00:00] TURN 26 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:21.806230+00:00] TURN 27 SNAPSHOT next_turn_in=0.725s map=318x318 own=1 enemy=0 construction=1 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:21.806444+00:00] PLAN turn=27 profile=safe
+[2026-04-18T10:58:21.806454+00:00] PLAN arena counts: own=1 enemy=0 construction=1 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:21.806459+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:21.806464+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:21.806469+00:00] PLAN top candidates:
+[2026-04-18T10:58:21.806474+00:00] PLAN   build mode=continue score=715.56 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:21.806478+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:21.806483+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:21.806487+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:21.806492+00:00] PLAN select build mode=continue score=715.56 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=715.56
+[2026-04-18T10:58:21.806496+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:21.806501+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:21.806505+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:21.806509+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:21.806514+00:00] PLAN selected summary: build mode=continue score=715.56 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:21.806532+00:00] DECISION turn=27 profile=safe estimated_score=715.56 reason=selected 1 plantation actions actions=['continue construction [147, 187] from [148, 187]']
+[2026-04-18T10:58:21.806540+00:00] TURN 27 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:21.920058+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:22.821344+00:00] TURN 28 SNAPSHOT next_turn_in=0.710s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:58:22.821545+00:00] PLAN turn=28 profile=safe
+[2026-04-18T10:58:22.821553+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:22.821559+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=False
+[2026-04-18T10:58:22.821564+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:22.821569+00:00] PLAN top candidates:
+[2026-04-18T10:58:22.821574+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:22.821578+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:22.821583+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:22.821587+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:22.821591+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:22.821599+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:22.821606+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:22.821610+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:22.821615+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:22.821620+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:22.821639+00:00] DECISION turn=28 profile=safe estimated_score=423.62 reason=selected 1 plantation actions actions=['build [147, 187] from [148, 187]']
+[2026-04-18T10:58:22.821648+00:00] TURN 28 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade=None relocate_main=None
+[2026-04-18T10:58:22.928007+00:00] ERROR command submit failed: POST https://games-test.datsteam.dev/api/command failed: code=24, too many requests from this user
+[2026-04-18T10:58:23.738025+00:00] ERROR arena fetch failed: GET https://games-test.datsteam.dev/api/arena failed: code=24, too many requests from this user
+[2026-04-18T10:58:24.574061+00:00] TURN 30 SNAPSHOT next_turn_in=0.958s map=318x318 own=1 enemy=0 construction=0 beavers=0 cells=1 main=[148,187] hp=50 isolated=False upgrade_points=1
+[2026-04-18T10:58:24.574269+00:00] PLAN turn=30 profile=safe
+[2026-04-18T10:58:24.574277+00:00] PLAN arena counts: own=1 enemy=0 construction=0 beavers=0 cells=1 mountains=0
+[2026-04-18T10:58:24.574284+00:00] PLAN safety snapshot: connected=1 critical=1 signal_range=3 action_range=2 settlement_limit=30 has_upgrade_points=True
+[2026-04-18T10:58:24.574289+00:00] PLAN candidate counts: build=4
+[2026-04-18T10:58:24.574293+00:00] PLAN top candidates:
+[2026-04-18T10:58:24.574298+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:24.574302+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186]
+[2026-04-18T10:58:24.574306+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188]
+[2026-04-18T10:58:24.574311+00:00] PLAN   build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187]
+[2026-04-18T10:58:24.574315+00:00] PLAN select build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187] raw_score=423.62
+[2026-04-18T10:58:24.574319+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,186] reason=author already used
+[2026-04-18T10:58:24.574324+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[148,188] reason=author already used
+[2026-04-18T10:58:24.574328+00:00] PLAN reject build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[149,187] reason=author already used
+[2026-04-18T10:58:24.574332+00:00] PLAN rejection summary: author already used=3
+[2026-04-18T10:58:24.574337+00:00] PLAN selected summary: build mode=new score=423.62 power=5 author=[148,187] exit=[148,187] target=[147,187]
+[2026-04-18T10:58:24.574341+00:00] PLAN upgrade selected: settlement_limit
+[2026-04-18T10:58:24.574360+00:00] DECISION turn=30 profile=safe estimated_score=455.62 reason=selected 1 plantation actions; upgrade=settlement_limit actions=['build [147, 187] from [148, 187]', 'buy upgrade settlement_limit']
+[2026-04-18T10:58:24.574369+00:00] TURN 30 REQUEST commands=['path=[[148,187],[148,187],[147,187]]'] plantation_upgrade='settlement_limit' relocate_main=None
+[2026-04-18T10:58:24.668714+00:00] TURN 30 RESPONSE success code=0 errors=[]
+[2026-04-18T10:58:24.669628+00:00] SESSION STOP

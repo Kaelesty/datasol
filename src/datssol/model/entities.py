@@ -38,6 +38,7 @@ class EnemyPlantation:
     id: EntityId
     position: Point
     hp: int
+    immunity_until_turn: int | None = None
 
 
 @dataclass(slots=True, frozen=True)

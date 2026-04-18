@@ -1,0 +1,6 @@
+[2026-04-18T10:46:52.640928+00:00] SESSION START server=test profile=safe token_file=.token timeout_seconds=1.0 poll_interval_seconds=0.01
+[2026-04-18T10:46:52.657130+00:00] TURN 10 SNAPSHOT next_turn_in=0.600s map=12x12 own=1 enemy=0 construction=0 beavers=0 cells=0 main=[1,1] hp=50 isolated=False upgrade_points=0
+[2026-04-18T10:46:52.657238+00:00] DECISION turn=10 profile=safe estimated_score=10.0 reason=static request actions=['buy upgrade repair_power']
+[2026-04-18T10:46:52.657260+00:00] TURN 10 REQUEST commands=[] plantation_upgrade='repair_power' relocate_main=None
+[2026-04-18T10:46:52.657415+00:00] TURN 10 RESPONSE success code=0 errors=[]
+[2026-04-18T10:46:52.721740+00:00] SESSION STOP

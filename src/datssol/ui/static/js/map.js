@@ -16,6 +16,7 @@ const mapState = {
     hoverCell: null,
   },
   autoRefreshId: null,
+  botDecision: null,
 };
 
 const HEROICON_PATHS = {
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindMapEvents();
   resizeCanvas();
   renderMapSummary(null);
+  renderObjectPanel(null);
   renderHoverCard();
   drawMap();
 });
@@ -68,6 +70,13 @@ function bindMapEvents() {
   document.getElementById("map-reset-view").addEventListener("click", () => {
     fitArenaToView();
     drawMap();
+  });
+  document.getElementById("map-objects").addEventListener("click", (event) => {
+    const target = event.target.closest("[data-focus-x][data-focus-y]");
+    if (!target) {
+      return;
+    }
+    focusCell(Number(target.dataset.focusX), Number(target.dataset.focusY));
   });
 
   window.addEventListener("datssol:server-changed", (event) => {
@@ -90,7 +99,13 @@ function bindMapEvents() {
     mapState.arena = null;
     showError(errorNode, event.detail.error || "Arena request failed.");
     renderMapSummary(null);
+    renderObjectPanel(null);
     renderHoverCard();
+    drawMap();
+  });
+
+  window.addEventListener("datssol:bot-state-updated", (event) => {
+    mapState.botDecision = event.detail.botState?.lastDecision || null;
     drawMap();
   });
 
@@ -164,6 +179,7 @@ function applyArenaSnapshot(nextArena) {
     mapState.viewportKey = nextViewportKey;
   }
   renderMapSummary(mapState.arena);
+  renderObjectPanel(mapState.arena);
   renderHoverCard();
   drawMap();
 }
@@ -191,11 +207,12 @@ function drawMap() {
 
   drawMountains(arena.mountains || []);
   drawCellProgress(arena.cells || []);
+  drawMeteo(arena.meteoForecasts || []);
   drawConstruction(arena.construction || []);
   drawEntities(arena.enemy || [], "#be4a2f", 0.44, "enemy");
   drawEntities(arena.plantations || [], "#3f7b5c", 0.46, "own");
-  drawEntities(arena.beavers || [], "#9860c8", 0.40, "beaver");
-  drawMeteo(arena.meteoForecasts || []);
+  drawEntities(arena.beavers || [], "#9860c8", 0.4, "beaver");
+  drawBotPlanOverlay(mapState.botDecision);
   drawCoordinateLabels(arena.size.width, arena.size.height);
   drawHoverHighlight();
 }
@@ -315,6 +332,9 @@ function drawConstruction(items) {
     ctx.arc(center.x, center.y, radius * 1.7, 0, Math.PI * 2);
     ctx.fill();
     drawHeroIcon("construction", center.x, center.y, radius * 2.2, "#cf7f2f", 1.8);
+    if (mapState.transform.scale >= 12) {
+      drawBadgeLabel(center.x, center.y + radius * 1.7, `C ${formatCompactNumber(item.progress)}`);
+    }
   });
 }
 
@@ -322,9 +342,9 @@ function drawEntities(items, color, radiusFactor, kind) {
   items.forEach((item) => {
     const position = item.position;
     const center = worldToScreen(position.x + 0.5, position.y + 0.5);
-    const radius = Math.max(3, mapState.transform.scale * radiusFactor);
+    const radius = Math.max(4, mapState.transform.scale * radiusFactor);
     ctx.beginPath();
-    ctx.fillStyle = applyAlpha(color, 0.16);
+    ctx.fillStyle = applyAlpha(color, kind === "enemy" ? 0.2 : 0.16);
     ctx.arc(center.x, center.y, radius * 1.75, 0, Math.PI * 2);
     ctx.fill();
     ctx.beginPath();
@@ -342,9 +362,17 @@ function drawEntities(items, color, radiusFactor, kind) {
       ctx.arc(center.x, center.y, radius * 1.7, 0, Math.PI * 2);
       ctx.stroke();
     }
+    if (kind === "enemy") {
+      ctx.beginPath();
+      ctx.strokeStyle = "rgba(190, 74, 47, 0.42)";
+      ctx.lineWidth = 1.6;
+      ctx.arc(center.x, center.y, radius * 2.05, 0, Math.PI * 2);
+      ctx.stroke();
+    }
 
     const iconName = kind === "own" ? "own" : kind === "enemy" ? "enemy" : "beaver";
     drawHeroIcon(iconName, center.x, center.y, radius * 2.2, "rgba(255, 248, 240, 0.96)", 1.6);
+    drawEntityLabel(item, center.x, center.y, radius, kind);
   });
 }
 
@@ -355,6 +383,8 @@ function drawMeteo(forecasts) {
     }
     const center = worldToScreen(item.position.x + 0.5, item.position.y + 0.5);
     const radius = Math.max(8, (item.radius || 4) * mapState.transform.scale);
+    ctx.save();
+    ctx.setLineDash(item.forming ? [8, 6] : [12, 8]);
     ctx.beginPath();
     ctx.fillStyle =
       item.kind === "sandstorm" ? "rgba(66, 123, 209, 0.08)" : "rgba(205, 84, 67, 0.08)";
@@ -365,6 +395,7 @@ function drawMeteo(forecasts) {
     ctx.lineWidth = 2;
     ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.restore();
     drawHeroIcon(
       "cloud",
       center.x,
@@ -377,9 +408,18 @@ function drawMeteo(forecasts) {
     if (item.nextPosition) {
       const next = worldToScreen(item.nextPosition.x + 0.5, item.nextPosition.y + 0.5);
       ctx.beginPath();
+      ctx.strokeStyle =
+        item.kind === "sandstorm" ? "rgba(66, 123, 209, 0.72)" : "rgba(205, 84, 67, 0.72)";
+      ctx.lineWidth = 2;
       ctx.moveTo(center.x, center.y);
       ctx.lineTo(next.x, next.y);
       ctx.stroke();
+      drawArrowHead(center, next, ctx.strokeStyle);
+    }
+
+    if (mapState.transform.scale >= 10) {
+      const suffix = item.forming ? " forming" : "";
+      drawBadgeLabel(center.x, center.y - Math.min(radius + 10, 32), `${item.kind}${suffix}`);
     }
   });
 }
@@ -402,6 +442,90 @@ function drawCoordinateLabels(width, height) {
       ctx.fillText(`${x},${y}`, pos.x + 3, pos.y + 12);
     }
   }
+}
+
+function drawBotPlanOverlay(decision) {
+  if (!decision || !Array.isArray(decision.actionDetails) || !decision.actionDetails.length) {
+    return;
+  }
+
+  decision.actionDetails.forEach((action) => {
+    if (!action || !action.target) {
+      return;
+    }
+    const target = worldToScreen(action.target.x + 0.5, action.target.y + 0.5);
+    const actionColor = botActionColor(action.kind);
+
+    if (action.author && action.exitPoint) {
+      const author = worldToScreen(action.author.x + 0.5, action.author.y + 0.5);
+      const exitPoint = worldToScreen(action.exitPoint.x + 0.5, action.exitPoint.y + 0.5);
+      drawBotSegment(author, exitPoint, actionColor, false);
+      drawBotSegment(exitPoint, target, actionColor, true);
+    } else if (action.author) {
+      const author = worldToScreen(action.author.x + 0.5, action.author.y + 0.5);
+      drawBotSegment(author, target, actionColor, true);
+    }
+
+    const pulse = Math.max(6, mapState.transform.scale * 0.48);
+    ctx.beginPath();
+    ctx.strokeStyle = actionColor;
+    ctx.lineWidth = 2;
+    ctx.setLineDash(action.kind === "relocate_main" ? [7, 5] : []);
+    ctx.arc(target.x, target.y, pulse, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    if (mapState.transform.scale >= 10) {
+      drawBadgeLabel(target.x, target.y + pulse + 12, overlayLabel(action));
+    }
+  });
+}
+
+function drawBotSegment(from, to, color, arrow) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.4;
+  ctx.setLineDash([8, 6]);
+  ctx.beginPath();
+  ctx.moveTo(from.x, from.y);
+  ctx.lineTo(to.x, to.y);
+  ctx.stroke();
+  ctx.restore();
+  if (arrow) {
+    drawArrowHead(from, to, color);
+  }
+}
+
+function botActionColor(kind) {
+  if (kind === "build") {
+    return "rgba(41, 112, 77, 0.92)";
+  }
+  if (kind === "relocate_main") {
+    return "rgba(35, 94, 168, 0.92)";
+  }
+  if (kind === "repair") {
+    return "rgba(197, 102, 52, 0.92)";
+  }
+  if (kind === "sabotage") {
+    return "rgba(190, 74, 47, 0.92)";
+  }
+  if (kind === "beaver") {
+    return "rgba(152, 96, 200, 0.92)";
+  }
+  if (kind === "upgrade") {
+    return "rgba(203, 141, 63, 0.92)";
+  }
+  return "rgba(57, 68, 78, 0.92)";
+}
+
+function overlayLabel(action) {
+  if (action.kind === "build") {
+    return action.summary.includes("continue construction") ? "CONTINUE" : "BUILD";
+  }
+  if (action.kind === "relocate_main") {
+    return "RELOCATE";
+  }
+  return String(action.kind || "action").toUpperCase();
 }
 
 function drawHoverHighlight() {
@@ -443,10 +567,84 @@ function renderMapSummary(arena) {
         Beavers: ${arena.counts.beavers}<br />
         Mountains: ${arena.counts.mountains}<br />
         Meteo: ${arena.counts.meteo}<br />
+        Objects on map: ${countTrackedObjects(arena)}<br />
         Zoom: ${mapState.transform.scale.toFixed(1)}x
       </div>
     </div>
   `;
+}
+
+function renderObjectPanel(arena) {
+  const node = document.getElementById("map-objects");
+  const caption = document.getElementById("map-objects-caption");
+
+  if (!arena) {
+    caption.textContent = "-";
+    node.innerHTML = `<div class="empty-state">Waiting for arena data.</div>`;
+    return;
+  }
+
+  const objects = [
+    ...(arena.plantations || []).map((item) => ({
+      kind: "own",
+      title: item.isMain ? "Own MAIN" : "Own plantation",
+      value: `HP ${item.hp}`,
+      x: item.position.x,
+      y: item.position.y,
+      meta: `pos=[${item.position.x}, ${item.position.y}] isolated=${item.isIsolated}`,
+    })),
+    ...(arena.enemy || []).map((item) => ({
+      kind: "enemy",
+      title: "Enemy plantation",
+      value: `HP ${item.hp}`,
+      x: item.position.x,
+      y: item.position.y,
+      meta: `pos=[${item.position.x}, ${item.position.y}] id=${escapeHtml(item.id)}`,
+    })),
+    ...(arena.beavers || []).map((item) => ({
+      kind: "beaver",
+      title: "Beaver lair",
+      value: `HP ${item.hp}`,
+      x: item.position.x,
+      y: item.position.y,
+      meta: `pos=[${item.position.x}, ${item.position.y}] id=${escapeHtml(item.id)}`,
+    })),
+    ...(arena.meteoForecasts || [])
+      .filter((item) => item.position)
+      .map((item) => ({
+        kind: "meteo",
+        title: item.kind,
+        value: item.turnsUntil == null ? "active" : `T-${item.turnsUntil}`,
+        x: item.position.x,
+        y: item.position.y,
+        meta: `pos=[${item.position.x}, ${item.position.y}] radius=${item.radius ?? "?"}${item.forming ? " forming" : ""}`,
+      })),
+  ];
+
+  caption.textContent = `${objects.length} tracked`;
+  if (!objects.length) {
+    node.innerHTML = `<div class="empty-state">No visible objects in the current snapshot.</div>`;
+    return;
+  }
+
+  node.innerHTML = objects
+    .map(
+      (item) => `
+        <button
+          type="button"
+          class="object-chip object-chip--${item.kind}"
+          data-focus-x="${item.x}"
+          data-focus-y="${item.y}"
+        >
+          <div class="object-chip__title">
+            <span>${escapeHtml(item.title)}</span>
+            <span>${escapeHtml(item.value)}</span>
+          </div>
+          <div class="object-chip__meta">${item.meta}</div>
+        </button>
+      `,
+    )
+    .join("");
 }
 
 function renderHoverCard() {
@@ -525,7 +723,122 @@ function lookupCellDetails(arena, x, y) {
         body: "Mountain",
       }),
     );
+  arena.meteoForecasts
+    .filter((item) => item.position && item.position.x === x && item.position.y === y)
+    .forEach((item) =>
+      details.push({
+        label: "Meteo anomaly",
+        body:
+          `kind=${escapeHtml(item.kind)}` +
+          `<br />turnsUntil=${item.turnsUntil == null ? "active" : item.turnsUntil}` +
+          `<br />radius=${item.radius == null ? "unknown" : item.radius}` +
+          `<br />forming=${item.forming == null ? "unknown" : item.forming}`,
+      }),
+    );
   return details;
+}
+
+function drawEntityLabel(item, centerX, centerY, radius, kind) {
+  if (mapState.transform.scale < 13) {
+    return;
+  }
+
+  let label = "";
+  if (kind === "own") {
+    label = item.isMain ? `MAIN ${item.hp}` : `OWN ${item.hp}`;
+  } else if (kind === "enemy") {
+    label = `EN ${item.hp}`;
+  } else if (kind === "beaver") {
+    label = `BV ${item.hp}`;
+  }
+  if (!label) {
+    return;
+  }
+  drawBadgeLabel(centerX, centerY - radius * 2.15, label);
+}
+
+function drawBadgeLabel(centerX, centerY, text) {
+  ctx.save();
+  ctx.font = '600 11px "IBM Plex Mono"';
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const paddingX = 7;
+  const width = ctx.measureText(text).width + paddingX * 2;
+  const height = 20;
+  const x = centerX - width / 2;
+  const y = centerY - height / 2;
+  ctx.fillStyle = "rgba(255, 251, 244, 0.92)";
+  ctx.strokeStyle = "rgba(58, 44, 30, 0.18)";
+  ctx.lineWidth = 1;
+  roundRect(ctx, x, y, width, height, 8);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = "rgba(46, 34, 22, 0.88)";
+  ctx.fillText(text, centerX, centerY + 0.5);
+  ctx.restore();
+}
+
+function drawArrowHead(from, to, color) {
+  const angle = Math.atan2(to.y - from.y, to.x - from.x);
+  const size = 8;
+  ctx.save();
+  ctx.translate(to.x, to.y);
+  ctx.rotate(angle);
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.moveTo(0, 0);
+  ctx.lineTo(-size, size * 0.45);
+  ctx.lineTo(-size, -size * 0.45);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function roundRect(context, x, y, width, height, radius) {
+  context.beginPath();
+  context.moveTo(x + radius, y);
+  context.lineTo(x + width - radius, y);
+  context.quadraticCurveTo(x + width, y, x + width, y + radius);
+  context.lineTo(x + width, y + height - radius);
+  context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  context.lineTo(x + radius, y + height);
+  context.quadraticCurveTo(x, y + height, x, y + height - radius);
+  context.lineTo(x, y + radius);
+  context.quadraticCurveTo(x, y, x + radius, y);
+  context.closePath();
+}
+
+function focusCell(x, y) {
+  if (!mapState.arena) {
+    return;
+  }
+  const scale = Math.max(mapState.transform.scale, 12);
+  mapState.transform.scale = scale;
+  mapState.transform.offsetX = canvas.clientWidth / 2 - (x + 0.5) * scale;
+  mapState.transform.offsetY = canvas.clientHeight / 2 - (y + 0.5) * scale;
+  mapState.pointer.hoverCell = { x, y };
+  renderHoverCard();
+  drawMap();
+}
+
+function countTrackedObjects(arena) {
+  return (
+    (arena.plantations || []).length +
+    (arena.enemy || []).length +
+    (arena.beavers || []).length +
+    (arena.meteoForecasts || []).filter((item) => item.position).length
+  );
+}
+
+function formatCompactNumber(value) {
+  const numeric = Number(value ?? 0);
+  if (!Number.isFinite(numeric)) {
+    return "0";
+  }
+  if (Math.abs(numeric) >= 100) {
+    return numeric.toFixed(0);
+  }
+  return numeric.toFixed(1);
 }
 
 function drawHeroIcon(name, centerX, centerY, size, strokeStyle, lineWidth) {

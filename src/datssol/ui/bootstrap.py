@@ -7,6 +7,7 @@ from pathlib import Path
 from datssol.data import GetArenaInteractor
 from datssol.data import GetLogsInteractor
 from datssol.data import RequestsGameApiGateway
+from datssol.data import SubmitCommandInteractor
 from datssol.data import load_token
 from datssol.model import ApiConfig
 
@@ -37,3 +38,18 @@ def build_read_only_interactors(
     gateway = RequestsGameApiGateway(config)
     return GetArenaInteractor(gateway), GetLogsInteractor(gateway)
 
+
+def build_bot_interactors(
+    *,
+    token_file: str | Path,
+    server: str = "test",
+    base_url: str | None = None,
+    timeout_seconds: float = 10.0,
+) -> tuple[GetArenaInteractor, SubmitCommandInteractor]:
+    config = ApiConfig(
+        base_url=resolve_base_url(server, base_url),
+        auth_token=load_token(token_file),
+        timeout_seconds=timeout_seconds,
+    )
+    gateway = RequestsGameApiGateway(config)
+    return GetArenaInteractor(gateway), SubmitCommandInteractor(gateway)

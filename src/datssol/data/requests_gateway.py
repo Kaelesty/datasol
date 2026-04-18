@@ -166,6 +166,7 @@ def _parse_enemy_plantation(payload: Any) -> EnemyPlantation:
         id=_require_entity_id(mapping, "id"),
         position=_parse_point(_require_sequence(mapping, "position")),
         hp=_require_int(mapping, "hp"),
+        immunity_until_turn=_optional_int(mapping.get("immunityUntilTurn")),
     )
 
 

@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import atexit
 import threading
 import time
 import webbrowser
 from pathlib import Path
 
+from datssol.bot import BotConfig
+from datssol.bot import BotRunner
+from datssol.bot import DEFAULT_PROFILE
+from datssol.bot import SUPPORTED_PROFILES
 from flask import Flask
 from flask import jsonify
 from flask import render_template
@@ -16,8 +21,10 @@ from datssol.model import ApiRequestError
 from datssol.model import ApiResponseError
 from datssol.ui.bootstrap import DEFAULT_PROD_BASE_URL
 from datssol.ui.bootstrap import DEFAULT_TEST_BASE_URL
+from datssol.ui.bootstrap import build_bot_interactors
 from datssol.ui.bootstrap import build_read_only_interactors
 from datssol.ui.web_presenters import arena_to_payload
+from datssol.ui.web_presenters import bot_state_to_payload
 from datssol.ui.web_presenters import logs_to_payload
 
 APP_HOST = "127.0.0.1"
@@ -26,10 +33,21 @@ TOKEN_FILE = Path(".token")
 REQUEST_TIMEOUT_SECONDS = 10.0
 DEFAULT_SERVER = "test"
 DEFAULT_LOGS_TAIL = 20
+DEFAULT_BOT_PROFILE = DEFAULT_PROFILE
 
 
-def create_app() -> Flask:
+def create_app(bot_runner: BotRunner | None = None) -> Flask:
     app = Flask(__name__, template_folder="templates", static_folder="static")
+    controller = bot_runner or BotRunner(
+        config=BotConfig(token_file=TOKEN_FILE, timeout_seconds=REQUEST_TIMEOUT_SECONDS),
+        interactor_factory=lambda server: build_bot_interactors(
+            token_file=TOKEN_FILE,
+            server=server,
+            timeout_seconds=REQUEST_TIMEOUT_SECONDS,
+        ),
+    )
+    app.config["BOT_RUNNER"] = controller
+    atexit.register(controller.stop)
 
     @app.get("/")
     def index() -> str:
@@ -38,10 +56,12 @@ def create_app() -> Flask:
             app_title="DatsSol Command Deck",
             default_server=DEFAULT_SERVER,
             default_logs_tail=DEFAULT_LOGS_TAIL,
+            default_bot_profile=DEFAULT_BOT_PROFILE,
             servers={
                 "test": DEFAULT_TEST_BASE_URL,
                 "prod": DEFAULT_PROD_BASE_URL,
             },
+            bot_profiles=SUPPORTED_PROFILES,
         )
 
     @app.get("/api/ui/meta")
@@ -52,6 +72,8 @@ def create_app() -> Flask:
                 "data": {
                     "defaultServer": DEFAULT_SERVER,
                     "defaultLogsTail": DEFAULT_LOGS_TAIL,
+                    "defaultBotProfile": DEFAULT_BOT_PROFILE,
+                    "botProfiles": list(SUPPORTED_PROFILES),
                     "servers": {
                         "test": DEFAULT_TEST_BASE_URL,
                         "prod": DEFAULT_PROD_BASE_URL,
@@ -97,6 +119,34 @@ def create_app() -> Flask:
                 "data": logs_to_payload(response, tail=tail),
             }
         )
+
+    @app.get("/api/ui/bot/state")
+    def bot_state():
+        return jsonify({"ok": True, "data": bot_state_to_payload(controller.get_state())})
+
+    @app.post("/api/ui/bot/control")
+    def bot_control():
+        payload = request.get_json(silent=True) or {}
+        action = str(payload.get("action", "")).strip().lower()
+
+        try:
+            if action == "start":
+                server = _normalized_server(payload.get("server"))
+                profile = payload.get("profile")
+                allow_prod = bool(payload.get("allowProd"))
+                state = controller.start(server=server, profile=profile, allow_prod=allow_prod)
+            elif action == "stop":
+                state = controller.stop()
+            elif action == "set_profile":
+                state = controller.set_profile(payload.get("profile"))
+            elif action == "set_server":
+                state = controller.set_server(_normalized_server(payload.get("server")))
+            else:
+                return jsonify({"ok": False, "error": f"Unsupported bot control action: {action!r}"}), 400
+        except ValueError as exc:
+            return jsonify({"ok": False, "error": str(exc)}), 400
+
+        return jsonify({"ok": True, "data": bot_state_to_payload(state)})
 
     return app
 

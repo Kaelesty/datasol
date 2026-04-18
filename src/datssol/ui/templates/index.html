@@ -38,7 +38,7 @@
               <input id="auto-refresh" type="checkbox" checked />
               <span class="switch__slider"></span>
             </label>
-            <p class="status-card__value">Every 4 seconds</p>
+            <p class="status-card__value">Every 3 seconds</p>
           </div>
         </div>
       </header>
@@ -98,6 +98,16 @@
 
             <section class="info-card">
               <div class="info-card__header">
+                <h3>Visible Objects</h3>
+                <span id="map-objects-caption" class="muted-label">-</span>
+              </div>
+              <div id="map-objects" class="list-grid list-grid--compact">
+                <div class="empty-state">Waiting for arena data.</div>
+              </div>
+            </section>
+
+            <section class="info-card">
+              <div class="info-card__header">
                 <h3>Hovered Cell</h3>
               </div>
               <div id="hover-card" class="stack-block">
@@ -105,6 +115,79 @@
               </div>
             </section>
           </aside>
+        </div>
+      </section>
+
+      <section class="panel panel--bot">
+        <div class="panel__header">
+          <div>
+            <p class="panel__eyebrow">Autonomous Control</p>
+            <h2>Bot Control</h2>
+          </div>
+          <button id="bot-refresh" class="action-button action-button--ghost">Refresh Bot State</button>
+        </div>
+
+        <div id="bot-error" class="message message--error hidden"></div>
+
+        <div class="info-columns">
+          <section class="info-card">
+            <div class="info-card__header">
+              <h3>Controls</h3>
+            </div>
+            <div class="stack-block">
+              <div class="control-row">
+                <label for="bot-profile" class="control-label">Profile</label>
+                <select id="bot-profile" class="control-input control-input--wide">
+                  {% for profile in bot_profiles %}
+                  <option value="{{ profile }}" {% if profile == default_bot_profile %}selected{% endif %}>{{ profile|capitalize }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="control-row">
+                <label for="bot-allow-prod" class="control-label">Allow Prod Start</label>
+                <label class="switch">
+                  <input id="bot-allow-prod" type="checkbox" />
+                  <span class="switch__slider"></span>
+                </label>
+              </div>
+              <div class="button-row">
+                <button id="bot-start" class="action-button">Start Bot</button>
+                <button id="bot-stop" class="action-button action-button--ghost">Stop Bot</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="info-card">
+            <div class="info-card__header">
+              <h3>Runtime</h3>
+            </div>
+            <div id="bot-status" class="stack-block">
+              <div class="empty-state">Waiting for bot state.</div>
+            </div>
+            <div id="bot-guard" class="stack-block"></div>
+            <div id="bot-counts" class="count-grid"></div>
+          </section>
+        </div>
+
+        <div class="info-columns info-columns--wide">
+          <section class="info-card">
+            <div class="info-card__header">
+              <h3>Last Decision</h3>
+            </div>
+            <div id="bot-decision" class="stack-block">
+              <div class="empty-state">No decisions yet.</div>
+            </div>
+          </section>
+
+          <section class="info-card">
+            <div class="info-card__header">
+              <h3>Policy</h3>
+            </div>
+            <div class="stack-block">
+              The bot runs server-side, submits at most one plan per turn, and uses
+              the currently selected viewer server on start.
+            </div>
+          </section>
         </div>
       </section>
 
@@ -207,6 +290,8 @@
       window.DATSSOL_UI_CONFIG = {
         defaultServer: {{ default_server|tojson }},
         defaultLogsTail: {{ default_logs_tail|tojson }},
+        defaultBotProfile: {{ default_bot_profile|tojson }},
+        botProfiles: {{ bot_profiles|tojson }},
         servers: {{ servers|tojson }},
       };
     </script>

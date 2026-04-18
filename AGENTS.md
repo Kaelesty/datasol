@@ -269,6 +269,7 @@ The game is not about holding static territory forever. Expansion is disposable 
 ### Map
 
 - The map is an XY plane.
+- Current map dimensions are server-defined and smaller than in earlier rule revisions.
 - Cells are either desert or mountain.
 - Desert cells can be terraformed and built on.
 - Mountain cells cannot be terraformed or built on.
@@ -450,7 +451,7 @@ Critical lifecycle rule:
 - when a cell reaches 100% terraformation, the plantation on it disappears
 
 Late decay rule:
-- after 80 turns, a fully terraformed cell begins losing 10% progress per turn
+- after 20 turns, a fully terraformed cell begins losing 10% progress per turn
 - documented timing may change after testing rounds
 
 Strategic consequence:
@@ -471,7 +472,7 @@ Lair stats:
 - regenerates 5 HP per turn
 
 Reward:
-- destroying a lair gives 10x the points that the cell could have produced
+- destroying a lair gives 20x the points that the cell could have produced
 
 Shared kill rule:
 - points go to the player who dealt the most damage on the last turn
@@ -537,7 +538,7 @@ Final winner is based on total round points across all final rounds.
 
 Tie-breakers across final rounds:
 1. more total round points
-2. fewer lost plantations
+2. fewer lost CUs
 3. more destroyed beavers
 4. more sabotages
 

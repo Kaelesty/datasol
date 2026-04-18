@@ -5,6 +5,11 @@ const state = {
   logsTail: config.defaultLogsTail,
   autoRefresh: true,
   intervalId: null,
+  bot: {
+    running: false,
+    profile: config.defaultBotProfile,
+    server: config.defaultServer,
+  },
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,17 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function bindEvents() {
   document.querySelectorAll("[data-server]").forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       state.server = button.dataset.server;
       syncServerButtons();
       syncServerLabel();
       dispatchServerChanged();
+      if (!state.bot.running) {
+        await controlBot("set_server", { server: state.server }, { suppressErrors: true, refresh: false });
+      }
       refreshAll();
     });
   });
 
   document.getElementById("refresh-arena").addEventListener("click", refreshArena);
   document.getElementById("refresh-logs").addEventListener("click", refreshLogs);
+  document.getElementById("bot-refresh").addEventListener("click", refreshBotState);
   document.getElementById("apply-tail").addEventListener("click", () => {
     const value = Number.parseInt(document.getElementById("logs-tail").value, 10);
     state.logsTail = Number.isNaN(value) ? config.defaultLogsTail : Math.max(0, value);
@@ -45,6 +54,25 @@ function bindEvents() {
     }
     stopAutoRefresh();
   });
+
+  document.getElementById("bot-profile").addEventListener("change", async (event) => {
+    await controlBot("set_profile", { profile: event.target.value }, { refresh: true });
+  });
+  document.getElementById("bot-start").addEventListener("click", async () => {
+    await controlBot(
+      "start",
+      {
+        server: state.server,
+        profile: document.getElementById("bot-profile").value,
+        allowProd: document.getElementById("bot-allow-prod").checked,
+      },
+      { refresh: true },
+    );
+    refreshAll();
+  });
+  document.getElementById("bot-stop").addEventListener("click", async () => {
+    await controlBot("stop", {}, { refresh: true });
+  });
 }
 
 function startAutoRefresh() {
@@ -54,7 +82,7 @@ function startAutoRefresh() {
       return;
     }
     refreshAll();
-  }, 4000);
+  }, 3000);
 }
 
 function stopAutoRefresh() {
@@ -75,7 +103,7 @@ function syncServerLabel() {
 }
 
 async function refreshAll() {
-  await Promise.all([refreshArena(), refreshLogs()]);
+  await Promise.all([refreshArena(), refreshLogs(), refreshBotState()]);
 }
 
 async function refreshArena() {
@@ -119,11 +147,67 @@ async function refreshLogs() {
   }
 }
 
+async function refreshBotState() {
+  const errorNode = document.getElementById("bot-error");
+  hideError(errorNode);
+
+  try {
+    const response = await fetchJson("/api/ui/bot/state");
+    if (!response.ok) {
+      showError(errorNode, response.error || "Bot state request failed.");
+      clearBotState();
+      return;
+    }
+    renderBotState(response.data);
+  } catch (error) {
+    showError(errorNode, String(error));
+    clearBotState();
+  }
+}
+
+async function controlBot(action, payload, options = {}) {
+  const { suppressErrors = false, refresh = true } = options;
+  const errorNode = document.getElementById("bot-error");
+  hideError(errorNode);
+
+  try {
+    const response = await postJson("/api/ui/bot/control", { action, ...payload });
+    if (!response.ok) {
+      if (!suppressErrors) {
+        showError(errorNode, response.error || "Bot control request failed.");
+      }
+      return null;
+    }
+    renderBotState(response.data);
+    if (refresh) {
+      await refreshBotState();
+    }
+    return response.data;
+  } catch (error) {
+    if (!suppressErrors) {
+      showError(errorNode, String(error));
+    }
+    return null;
+  }
+}
+
 async function fetchJson(url) {
   const response = await fetch(url, { headers: { Accept: "application/json" } });
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}`);
   }
+  return response.json();
+}
+
+async function postJson(url, payload) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
   return response.json();
 }
 
@@ -335,6 +419,112 @@ function renderLogs(data) {
     .join("");
 }
 
+function renderBotState(data) {
+  state.bot = {
+    running: Boolean(data.running),
+    profile: data.profile || config.defaultBotProfile,
+    server: data.server || config.defaultServer,
+    lastDecision: data.lastDecision || null,
+  };
+
+  document.getElementById("bot-profile").value = state.bot.profile;
+  document.getElementById("bot-start").disabled = state.bot.running;
+  document.getElementById("bot-stop").disabled = !state.bot.running;
+
+  renderBotStatus(data);
+  renderBotCounts(data);
+  renderBotDecision(data.lastDecision);
+  renderBotGuard(data);
+  dispatchBotStateUpdated(data);
+}
+
+function renderBotStatus(data) {
+  const node = document.getElementById("bot-status");
+  const runtime = state.bot.running ? "Running" : "Stopped";
+  node.innerHTML = `
+    <div class="list-item">
+      <div class="list-item__title">
+        <span>Status</span>
+        <span>${runtime}</span>
+      </div>
+      <div class="stack-block">
+        Bot server: ${escapeHtml(data.server || "-")}<br />
+        Viewer server: ${escapeHtml(state.server)}<br />
+        Profile: ${escapeHtml(data.profile || config.defaultBotProfile)}<br />
+        Last seen turn: ${data.lastSeenTurn ?? "-"}<br />
+        Last submitted turn: ${data.lastSubmittedTurn ?? "-"}
+      </div>
+    </div>
+  `;
+}
+
+function renderBotCounts(data) {
+  const node = document.getElementById("bot-counts");
+  const counts = [
+    ["Submitted", data.submittedCount ?? 0],
+    ["Skipped", data.skippedCount ?? 0],
+    ["Rejected", data.rejectedCount ?? 0],
+    ["Errors", data.errorCount ?? 0],
+  ];
+  node.innerHTML = counts
+    .map(
+      ([label, value]) => `
+        <article class="count-chip">
+          <span class="muted-label">${label}</span>
+          <strong>${value}</strong>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderBotDecision(decision) {
+  const node = document.getElementById("bot-decision");
+  if (!decision) {
+    node.innerHTML = `<div class="empty-state">No decisions yet.</div>`;
+    return;
+  }
+
+  const actions = decision.actions || [];
+  node.innerHTML = `
+    <div class="list-item">
+      <div class="list-item__title">
+        <span>Turn ${decision.turnNo ?? "-"}</span>
+        <span>Score ${formatScore(decision.estimatedScore)}</span>
+      </div>
+      <div class="list-item__meta">Profile: ${escapeHtml(decision.profile || config.defaultBotProfile)}</div>
+      <div class="stack-block">${escapeHtml(decision.reason || "No decision reason.")}</div>
+    </div>
+    ${
+      actions.length
+        ? actions
+            .map(
+              (action) => `
+                <article class="list-item">
+                  <div class="stack-block">${escapeHtml(action)}</div>
+                </article>
+              `,
+            )
+            .join("")
+        : '<div class="empty-state">No action breakdown available.</div>'
+    }
+  `;
+}
+
+function renderBotGuard(data) {
+  const node = document.getElementById("bot-guard");
+  if ((data.server || "") !== "prod") {
+    node.innerHTML = "";
+    return;
+  }
+  node.innerHTML = `
+    <div class="message message--error">
+      Prod mode is selected for the bot. Starting requires the explicit “Allow Prod Start” switch.
+      ${data.lastError ? `<br /><br />Last error: ${escapeHtml(data.lastError)}` : ""}
+    </div>
+  `;
+}
+
 function clearArena() {
   document.getElementById("turn-no").textContent = "-";
   document.getElementById("next-turn").textContent = "-";
@@ -381,6 +571,30 @@ function clearLogs() {
   document.getElementById("logs-list").innerHTML = "";
 }
 
+function clearBotState() {
+  state.bot = {
+    running: false,
+    profile: config.defaultBotProfile,
+    server: config.defaultServer,
+    lastDecision: null,
+  };
+  document.getElementById("bot-status").innerHTML = `<div class="empty-state">No bot state.</div>`;
+  document.getElementById("bot-counts").innerHTML = "";
+  document.getElementById("bot-decision").innerHTML = `<div class="empty-state">No decisions yet.</div>`;
+  document.getElementById("bot-guard").innerHTML = "";
+  document.getElementById("bot-start").disabled = false;
+  document.getElementById("bot-stop").disabled = true;
+  dispatchBotStateUpdated({ running: false, profile: config.defaultBotProfile, server: config.defaultServer, lastDecision: null });
+}
+
+function dispatchBotStateUpdated(botState) {
+  window.dispatchEvent(
+    new CustomEvent("datssol:bot-state-updated", {
+      detail: { botState },
+    }),
+  );
+}
+
 function showError(node, message) {
   node.textContent = message;
   node.classList.remove("hidden");
@@ -402,4 +616,9 @@ function escapeHtml(value) {
 
 function formatNumber(value) {
   return Number.isInteger(value) ? String(value) : Number(value).toFixed(1);
+}
+
+function formatScore(value) {
+  const numeric = Number(value ?? 0);
+  return Number.isFinite(numeric) ? numeric.toFixed(1) : "0.0";
 }
