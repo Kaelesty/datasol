@@ -1,0 +1,128 @@
+"""Flask application for the read-only Datssol web UI."""
+
+from __future__ import annotations
+
+import threading
+import time
+import webbrowser
+from pathlib import Path
+
+from flask import Flask
+from flask import jsonify
+from flask import render_template
+from flask import request
+
+from datssol.model import ApiRequestError
+from datssol.model import ApiResponseError
+from datssol.ui.bootstrap import DEFAULT_PROD_BASE_URL
+from datssol.ui.bootstrap import DEFAULT_TEST_BASE_URL
+from datssol.ui.bootstrap import build_read_only_interactors
+from datssol.ui.web_presenters import arena_to_payload
+from datssol.ui.web_presenters import logs_to_payload
+
+APP_HOST = "127.0.0.1"
+APP_PORT = 8765
+TOKEN_FILE = Path(".token")
+REQUEST_TIMEOUT_SECONDS = 10.0
+DEFAULT_SERVER = "test"
+DEFAULT_LOGS_TAIL = 20
+
+
+def create_app() -> Flask:
+    app = Flask(__name__, template_folder="templates", static_folder="static")
+
+    @app.get("/")
+    def index() -> str:
+        return render_template(
+            "index.html",
+            app_title="DatsSol Command Deck",
+            default_server=DEFAULT_SERVER,
+            default_logs_tail=DEFAULT_LOGS_TAIL,
+            servers={
+                "test": DEFAULT_TEST_BASE_URL,
+                "prod": DEFAULT_PROD_BASE_URL,
+            },
+        )
+
+    @app.get("/api/ui/meta")
+    def meta():
+        return jsonify(
+            {
+                "ok": True,
+                "data": {
+                    "defaultServer": DEFAULT_SERVER,
+                    "defaultLogsTail": DEFAULT_LOGS_TAIL,
+                    "servers": {
+                        "test": DEFAULT_TEST_BASE_URL,
+                        "prod": DEFAULT_PROD_BASE_URL,
+                    },
+                },
+            }
+        )
+
+    @app.get("/api/ui/arena")
+    def arena():
+        server = _normalized_server(request.args.get("server"))
+        try:
+            arena_interactor, _ = build_read_only_interactors(
+                token_file=TOKEN_FILE,
+                server=server,
+                timeout_seconds=REQUEST_TIMEOUT_SECONDS,
+            )
+            state = arena_interactor.execute()
+        except (ApiRequestError, ApiResponseError, ValueError) as exc:
+            return jsonify({"ok": False, "error": str(exc), "server": server})
+
+        return jsonify({"ok": True, "server": server, "data": arena_to_payload(state)})
+
+    @app.get("/api/ui/logs")
+    def logs():
+        server = _normalized_server(request.args.get("server"))
+        tail = _normalized_tail(request.args.get("tail"))
+        try:
+            _, logs_interactor = build_read_only_interactors(
+                token_file=TOKEN_FILE,
+                server=server,
+                timeout_seconds=REQUEST_TIMEOUT_SECONDS,
+            )
+            response = logs_interactor.execute()
+        except (ApiRequestError, ApiResponseError, ValueError) as exc:
+            return jsonify({"ok": False, "error": str(exc), "server": server, "tail": tail})
+
+        return jsonify(
+            {
+                "ok": True,
+                "server": server,
+                "tail": tail,
+                "data": logs_to_payload(response, tail=tail),
+            }
+        )
+
+    return app
+
+
+def main() -> int:
+    app = create_app()
+    url = f"http://{APP_HOST}:{APP_PORT}"
+    threading.Thread(target=_open_browser, args=(url,), daemon=True).start()
+    app.run(host=APP_HOST, port=APP_PORT, debug=False, use_reloader=False)
+    return 0
+
+
+def _open_browser(url: str) -> None:
+    time.sleep(0.8)
+    webbrowser.open(url)
+
+
+def _normalized_server(raw_server: str | None) -> str:
+    return raw_server if raw_server in {"test", "prod"} else DEFAULT_SERVER
+
+
+def _normalized_tail(raw_tail: str | None) -> int:
+    if raw_tail is None:
+        return DEFAULT_LOGS_TAIL
+    try:
+        tail = int(raw_tail)
+    except ValueError:
+        return DEFAULT_LOGS_TAIL
+    return max(0, tail)

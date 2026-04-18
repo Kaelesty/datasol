@@ -1,0 +1,2 @@
+"""Datssol bot package."""
+

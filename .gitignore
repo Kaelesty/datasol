@@ -1,1 +1,6 @@
 .token
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.venv/
+src/**/__pycache__/
