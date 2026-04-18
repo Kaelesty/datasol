@@ -172,11 +172,22 @@ function applyArenaSnapshot(nextArena) {
   hideError(errorNode);
   const nextViewportKey = buildViewportKey(mapState.server, nextArena);
   const shouldRefit = mapState.viewportKey !== nextViewportKey;
+  const previousMain = getMainPosition(mapState.arena);
+  const nextMain = getMainPosition(nextArena);
+  const shouldFollowMain =
+    !shouldRefit &&
+    previousMain != null &&
+    nextMain != null &&
+    hasPositionChanged(previousMain, nextMain);
 
   mapState.arena = nextArena;
   if (shouldRefit) {
     fitArenaToView();
     mapState.viewportKey = nextViewportKey;
+  }
+  if (shouldFollowMain) {
+    centerViewOnCell(nextMain.x, nextMain.y);
+    mapState.pointer.hoverCell = { x: nextMain.x, y: nextMain.y };
   }
   renderMapSummary(mapState.arena);
   renderObjectPanel(mapState.arena);
@@ -819,6 +830,33 @@ function focusCell(x, y) {
   mapState.pointer.hoverCell = { x, y };
   renderHoverCard();
   drawMap();
+}
+
+function getMainPosition(arena) {
+  if (!arena || !Array.isArray(arena.plantations)) {
+    return null;
+  }
+  const main = arena.plantations.find((item) => item?.isMain && item.position);
+  if (!main) {
+    return null;
+  }
+  const x = Number(main.position.x);
+  const y = Number(main.position.y);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    return null;
+  }
+  return { x, y };
+}
+
+function hasPositionChanged(previous, next) {
+  return previous.x !== next.x || previous.y !== next.y;
+}
+
+function centerViewOnCell(x, y) {
+  const scale = clamp(mapState.transform.scale, 2, 60);
+  mapState.transform.scale = scale;
+  mapState.transform.offsetX = canvas.clientWidth / 2 - (x + 0.5) * scale;
+  mapState.transform.offsetY = canvas.clientHeight / 2 - (y + 0.5) * scale;
 }
 
 function countTrackedObjects(arena) {

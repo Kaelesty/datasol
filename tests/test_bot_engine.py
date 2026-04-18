@@ -13,6 +13,7 @@ from datssol.bot import BotSafetyValidator
 from datssol.bot.engine import PlannedAction
 from datssol.bot.engine import PlannedTurn
 from datssol.model import ArenaState
+from datssol.model import BeaverTarget
 from datssol.model import Cell
 from datssol.model import CommandRequest
 from datssol.model import CommandResponse
@@ -170,6 +171,31 @@ class PlannerProfileTests(unittest.TestCase):
         self.assertIsNotNone(planned.request.relocate_main)
         self.assertEqual(planned.request.relocate_main.to_point, Point(4, 5))
 
+    def test_safe_profile_does_not_relocate_when_main_cell_still_has_multiple_turns_left(self) -> None:
+        arena = make_arena(
+            plantations=(
+                Plantation(id="main", position=Point(6, 6), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),
+                Plantation(id="ally", position=Point(6, 7), is_main=False, is_isolated=False, immunity_until_turn=None, hp=50),
+            ),
+            cells=(Cell(position=Point(6, 6), terraformation_progress=86.0, turns_until_degradation=None),),
+        )
+        planned = self.planner.plan_turn(arena, "safe")
+        self.assertIsNotNone(planned.request)
+        self.assertIsNone(planned.request.relocate_main)
+
+    def test_safe_profile_relocates_main_only_when_terraform_completion_is_imminent(self) -> None:
+        arena = make_arena(
+            plantations=(
+                Plantation(id="main", position=Point(6, 6), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),
+                Plantation(id="ally", position=Point(6, 7), is_main=False, is_isolated=False, immunity_until_turn=None, hp=50),
+            ),
+            cells=(Cell(position=Point(6, 6), terraformation_progress=91.0, turns_until_degradation=None),),
+        )
+        planned = self.planner.plan_turn(arena, "safe")
+        self.assertIsNotNone(planned.request)
+        self.assertIsNotNone(planned.request.relocate_main)
+        self.assertEqual(planned.request.relocate_main.to_point, Point(6, 7))
+
     def test_aggressive_prefers_sabotage_when_build_value_is_poor(self) -> None:
         allowed_positions = {Point(2, 2), Point(2, 3), Point(4, 2), Point(3, 3)}
         mountains = tuple(
@@ -217,7 +243,7 @@ class PlannerProfileTests(unittest.TestCase):
         self.assertEqual(build_actions[0].target, Point(5, 4))
         self.assertIn("continue construction", build_actions[0].summary)
 
-    def test_planner_relocates_main_to_adjacent_finished_plantation(self) -> None:
+    def test_planner_does_not_relocate_main_early_when_not_at_risk(self) -> None:
         arena = make_arena(
             plantations=(
                 Plantation(id="main", position=Point(3, 3), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),
@@ -226,16 +252,18 @@ class PlannerProfileTests(unittest.TestCase):
         )
         planned = self.planner.plan_turn(arena, "safe")
         self.assertIsNotNone(planned.request)
-        self.assertIsNotNone(planned.request.relocate_main)
-        self.assertEqual(planned.request.relocate_main.to_point, Point(3, 4))
+        self.assertIsNone(planned.request.relocate_main)
 
-    def test_planner_relocates_main_when_adjacent_construction_completes_this_turn(self) -> None:
+    def test_planner_relocates_main_when_risky_and_adjacent_construction_completes_this_turn(self) -> None:
         arena = make_arena(
             plantations=(
                 Plantation(id="main", position=Point(4, 4), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),
             ),
             construction_specs=((Point(4, 5), 45.0),),
-            cells=(Cell(position=Point(4, 5), terraformation_progress=0.0, turns_until_degradation=None),),
+            cells=(
+                Cell(position=Point(4, 4), terraformation_progress=96.0, turns_until_degradation=None),
+                Cell(position=Point(4, 5), terraformation_progress=0.0, turns_until_degradation=None),
+            ),
         )
         planned = self.planner.plan_turn(arena, "safe")
         self.assertIsNotNone(planned.request)
@@ -243,7 +271,20 @@ class PlannerProfileTests(unittest.TestCase):
         self.assertEqual(planned.request.relocate_main.to_point, Point(4, 5))
         self.assertTrue(any(action.target == Point(4, 5) for action in planned.actions if action.kind == "build"))
 
-    def test_planner_allows_multiple_authors_to_continue_same_construction(self) -> None:
+    def test_planner_relocates_main_under_lethal_beaver_threat_when_safe_adjacent_exists(self) -> None:
+        arena = make_arena(
+            plantations=(
+                Plantation(id="main", position=Point(4, 4), is_main=True, is_isolated=False, immunity_until_turn=None, hp=15),
+                Plantation(id="ally", position=Point(4, 5), is_main=False, is_isolated=False, immunity_until_turn=None, hp=50),
+            ),
+            beavers=(BeaverTarget(id="beaver", position=Point(4, 2), hp=100),),
+        )
+        planned = self.planner.plan_turn(arena, "safe")
+        self.assertIsNotNone(planned.request)
+        self.assertIsNotNone(planned.request.relocate_main)
+        self.assertEqual(planned.request.relocate_main.to_point, Point(4, 5))
+
+    def test_planner_distributes_build_actions_across_targets(self) -> None:
         arena = make_arena(
             plantations=(
                 Plantation(id="main", position=Point(5, 5), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),
@@ -253,8 +294,10 @@ class PlannerProfileTests(unittest.TestCase):
             cells=(Cell(position=Point(5, 4), terraformation_progress=0.0, turns_until_degradation=None),),
         )
         planned = self.planner.plan_turn(arena, "safe")
-        build_actions = [action for action in planned.actions if action.kind == "build" and action.target == Point(5, 4)]
+        build_actions = [action for action in planned.actions if action.kind == "build"]
         self.assertGreaterEqual(len(build_actions), 2)
+        self.assertTrue(any(action.target == Point(5, 4) for action in build_actions))
+        self.assertEqual(len({action.target for action in build_actions}), len(build_actions))
 
 
 class FakeArenaInteractor:
@@ -273,6 +316,18 @@ class FakeCommandInteractor:
     def execute(self, request: CommandRequest) -> CommandResponse:
         self.calls.append(request)
         return self.response
+
+
+class SequencedCommandInteractor:
+    def __init__(self, responses: list[CommandResponse]) -> None:
+        self.responses = responses
+        self.calls: list[CommandRequest] = []
+
+    def execute(self, request: CommandRequest) -> CommandResponse:
+        self.calls.append(request)
+        if not self.responses:
+            return CommandResponse(code=0, errors=())
+        return self.responses.pop(0)
 
 
 class StaticPlanner:
@@ -326,6 +381,29 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(command_interactor.calls), 1)
         self.assertEqual(state.last_submitted_turn, arena.turn_no)
         self.assertEqual(state.rejected_count, 1)
+
+    def test_runner_retries_once_on_transient_command_rejection(self) -> None:
+        arena = make_arena(
+            plantations=(Plantation(id="main", position=Point(1, 1), is_main=True, is_isolated=False, immunity_until_turn=None, hp=50),),
+        )
+        command_interactor = SequencedCommandInteractor(
+            [
+                CommandResponse(code=0, errors=("temporary upstream error",)),
+                CommandResponse(code=0, errors=()),
+            ]
+        )
+        runner = BotRunner(
+            config=BotConfig(timeout_seconds=1.0, poll_interval_seconds=0.01),
+            interactor_factory=lambda server: (FakeArenaInteractor(arena), command_interactor),
+            planner=StaticPlanner(CommandRequest(plantation_upgrade="repair_power")),
+        )
+        runner.start(server="test", profile="safe")
+        time.sleep(0.08)
+        runner.stop()
+        state = runner.get_state()
+        self.assertEqual(len(command_interactor.calls), 2)
+        self.assertEqual(state.submitted_count, 1)
+        self.assertEqual(state.rejected_count, 0)
 
     def test_runner_writes_separate_session_logs_with_decision_context(self) -> None:
         arena_one = make_arena(

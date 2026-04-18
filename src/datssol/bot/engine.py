@@ -30,13 +30,14 @@ BotInteractorFactory = Callable[[str], tuple[GetArenaInteractor, SubmitCommandIn
 
 DEFAULT_PROFILE: BotProfileName = "safe"
 SUPPORTED_PROFILES: tuple[BotProfileName, ...] = ("safe", "expansion", "development", "aggressive")
+RELOCATE_TERRAFORM_EMERGENCY_TURNS = 2
 
 
 @dataclass(slots=True, frozen=True)
 class BotConfig:
     token_file: Path = Path(".token")
     timeout_seconds: float = 10.0
-    poll_interval_seconds: float = 0.25
+    poll_interval_seconds: float = 0.08
     log_dir: Path = Path("logs/bot-sessions")
 
 
@@ -248,8 +249,8 @@ class ProfileStrategy:
         if headroom <= 0 or connected_count <= 0:
             return 0
 
-        base_targets = {"safe": 2, "expansion": 3, "development": 4, "aggressive": 3}
-        growth_bonus = max(0, min(2, connected_count // 3))
+        base_targets = {"safe": 3, "expansion": 4, "development": 5, "aggressive": 3}
+        growth_bonus = max(0, min(3, connected_count // 2))
         target = base_targets[self.name] + growth_bonus
         return min(target, connected_count, construction_count + headroom)
 
@@ -346,6 +347,7 @@ class BotSafetyValidator:
         self.repair_power = 5 + self.tier_levels.get("repair_power", 0)
         self.sabotage_power = 5
         self.beaver_power = 5
+        self.beaver_attack_damage = max(0, 15 - self.tier_levels.get("beaver_damage_mitigation", 0) * 2)
         self.max_hp = 50 + self.tier_levels.get("max_hp", 0) * 10
         self.settlement_limit = 30 + self.tier_levels.get("settlement_limit", 0)
 
@@ -397,6 +399,9 @@ class BotSafetyValidator:
 
     def is_target_immune(self, enemy: EnemyPlantation | None) -> bool:
         return enemy is not None and enemy.immunity_until_turn is not None and enemy.immunity_until_turn > self.arena.turn_no
+
+    def is_under_beaver_threat(self, position: Point) -> bool:
+        return any(self.in_square_range(position, beaver.position, 2) for beaver in self.arena.beavers)
 
     def build_would_exceed_limit(self, extra_builds: int) -> bool:
         return len(self.arena.plantations) + len(self.arena.construction) + extra_builds > self.settlement_limit
@@ -456,7 +461,7 @@ class BotSafetyValidator:
     ) -> tuple[bool, str]:
         if candidate.author in selected_authors:
             return False, "author already used"
-        if candidate.target in selected_targets and candidate.kind != "build":
+        if candidate.target in selected_targets:
             return False, "target already used"
         if not self.can_command(candidate.author):
             return False, "author is not connected to CU"
@@ -875,8 +880,7 @@ class BotPlanner:
                 f"select {self._describe_candidate(accepted)} raw_score={candidate.base_score:.2f}"
             )
             selected_authors.add(candidate.author)
-            if candidate.kind != "build":
-                selected_targets.add(candidate.target)
+            selected_targets.add(candidate.target)
             exit_usage[candidate.exit_point] += 1
             if candidate.kind == "build":
                 selected_build_actions += 1
@@ -965,11 +969,27 @@ class BotPlanner:
             return None
 
         main_progress = safety.cell_progress(safety.main.position)
-        force_relocate = profile != "development" or main_progress >= 95.0 or safety.main.hp <= 20
+        # Keep the CU stable unless the loss is nearly unavoidable.
+        turns_until_main_loss = ceil(max(0.0, 100.0 - main_progress) / 5.0)
+        terraform_emergency = turns_until_main_loss <= RELOCATE_TERRAFORM_EMERGENCY_TURNS
+        beaver_emergency = (
+            safety.main.hp <= safety.beaver_attack_damage
+            and safety.is_under_beaver_threat(safety.main.position)
+        )
+        force_relocate = terraform_emergency or beaver_emergency
 
         adjacent_ready = tuple(item.position for item in safety.adjacent_relocate_options())
         if adjacent_ready and force_relocate:
-            return safety.choose_best_relocate_option(adjacent_ready)
+            survivable_adjacent = tuple(
+                position
+                for position in adjacent_ready
+                if not beaver_emergency or not safety.is_under_beaver_threat(position)
+            )
+            candidates = survivable_adjacent
+            if terraform_emergency and not candidates:
+                candidates = adjacent_ready
+            if candidates:
+                return safety.choose_best_relocate_option(candidates)
 
         completing_targets = tuple(
             action.target
@@ -980,7 +1000,16 @@ class BotPlanner:
             and safety.construction_progress(action.target) + action.base_power >= 50
         )
         if completing_targets and force_relocate:
-            return safety.choose_best_relocate_option(completing_targets)
+            survivable_completing = tuple(
+                position
+                for position in completing_targets
+                if not beaver_emergency or not safety.is_under_beaver_threat(position)
+            )
+            candidates = survivable_completing
+            if terraform_emergency and not candidates:
+                candidates = completing_targets
+            if candidates:
+                return safety.choose_best_relocate_option(candidates)
         return None
 
 
@@ -1239,10 +1268,32 @@ class BotRunner:
                 continue
 
             self._log(f"TURN {arena.turn_no} REQUEST {_describe_command_request(request)}")
-            try:
-                response = command_interactor.execute(request)
-            except Exception as exc:  # pragma: no cover - exercised in tests via state assertions
-                self._record_error(f"command submit failed: {exc}")
+            response = None
+            for attempt in range(2):
+                try:
+                    response = command_interactor.execute(request)
+                except Exception as exc:  # pragma: no cover - exercised in tests via state assertions
+                    if attempt == 0:
+                        self._log(f"TURN {arena.turn_no} RESPONSE submit error: {exc}; retrying once")
+                        continue
+                    self._record_error(f"command submit failed: {exc}")
+                    response = None
+                    break
+
+                if response.is_success:
+                    break
+
+                error_text = "; ".join(response.errors) if response.errors else "unknown command rejection"
+                if "already submitted" in error_text:
+                    break
+
+                if attempt == 0:
+                    self._log(
+                        f"TURN {arena.turn_no} RESPONSE transient failure code={response.code} "
+                        f"errors={error_text}; retrying once"
+                    )
+
+            if response is None:
                 continue
 
             self._processed_turn = arena.turn_no

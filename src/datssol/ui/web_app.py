@@ -39,7 +39,11 @@ DEFAULT_BOT_PROFILE = DEFAULT_PROFILE
 def create_app(bot_runner: BotRunner | None = None) -> Flask:
     app = Flask(__name__, template_folder="templates", static_folder="static")
     controller = bot_runner or BotRunner(
-        config=BotConfig(token_file=TOKEN_FILE, timeout_seconds=REQUEST_TIMEOUT_SECONDS),
+        config=BotConfig(
+            token_file=TOKEN_FILE,
+            timeout_seconds=REQUEST_TIMEOUT_SECONDS,
+            poll_interval_seconds=0.08,
+        ),
         interactor_factory=lambda server: build_bot_interactors(
             token_file=TOKEN_FILE,
             server=server,
